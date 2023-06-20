@@ -8,23 +8,24 @@ import { ThemeProvider } from '@mui/material/styles';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
-import styled from 'styled-components';
+import AnimatedBackground from './Components/AnimatedBackground';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
 root.render(
-    <ThemeProvider theme={theme}>
-      <StyledThemeProvider theme={theme}>
-        <CssBaseline />
-        <Router>
-          <Routes>
-            <Route path="/" element={<App />} />
-          </Routes>
-        </Router>
-      </StyledThemeProvider>
-    </ThemeProvider>
+  <ThemeProvider theme={theme}>
+    <StyledThemeProvider theme={theme}>
+      <CssBaseline />
+      <Router>
+        <AnimatedBackground />
+        <Routes>
+          <Route path="/" element={<App />} />
+        </Routes>
+      </Router>
+    </StyledThemeProvider>
+  </ThemeProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

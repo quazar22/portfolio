@@ -10,10 +10,10 @@ const AboutMe = () => {
   return (
     <Container maxWidth="lg" id="aboutme"
     sx={{
-      minHeight: `calc(100vh - ${appBarHeight}px)`,
+      minHeight: `calc(100vh - ${appBarHeight}px)`
     }}
     >
-      <Grid container spacing={2} mt={isMobile ? 4 : 16} alignItems={"center"}>
+      <Grid container spacing={2} mt={isMobile ? 8 : 16} alignItems={"center"}>
         <Grid item xs={12} md={6}>
           <Grid container direction="column" alignItems="center">
             <Typography variant={isMobile ? "h4" : "h3"}>Geoffrey Knox</Typography>

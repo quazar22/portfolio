@@ -38,24 +38,6 @@ const theme = createTheme({
         body: {
           backgroundColor: '#041925',
         },
-        '@global': {
-          '@keyframes star': {
-            '0%': {
-              transform: 'translateY(0)',
-              opacity: 0,
-            },
-            '10%': {
-              opacity: 1,
-            },
-            '100%': {
-              transform: 'translateY(100vh)',
-              opacity: 0,
-            },
-          },
-          'span': {
-            position: 'absolute',
-          },
-        },
       },
     },
     MuiTypography: {
