@@ -12,7 +12,6 @@ const StyledLink = styled(Link)`
   // margin-right: 8px;
   margin-right: 6px;
   // font size 1.25rem = 20px
-  font-size: 1.25rem;
   // remove border
   border: none;
   // remove box shadow

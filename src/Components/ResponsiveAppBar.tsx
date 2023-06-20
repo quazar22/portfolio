@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Drawer from '@mui/material/Drawer';
@@ -14,13 +14,24 @@ import List from '@mui/material/List';
 import StyledLink from './StyledLink';
 import Link from '@mui/material/Link';
 import StyledAppBar from './StyledAppBar';
+import hexToRgbA from '../utils/hexToRgba';
 
 const pages = ['About Me', 'Experience', 'Education', 'Contact'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const [showBar, setShowBar] = useState(true);
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  const checkScroll = () => {
+    const currentScrollPos = window.pageYOffset;
+    const isShow = scrollPosition > currentScrollPos;
+    setShowBar(isShow);
+    setScrollPosition(currentScrollPos);
+  };
+
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -37,13 +48,18 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  useEffect(() => {
+    window.addEventListener("scroll", checkScroll);
+    return () => window.removeEventListener("scroll", checkScroll);
+  }, [scrollPosition]);
 
   const drawer = (
     <div>
@@ -62,7 +78,17 @@ function ResponsiveAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }} justifyContent={"end"}>
-      <AppBar position="static" sx={{}}>
+      <AppBar position="fixed" style={{ top: showBar ? '0' : '-64px', transition: 'top 0.5s'}}
+        sx={{
+          // set background color to transparent
+          // background: 'transparent',
+          background: hexToRgbA(theme.palette.background.default, 0.5),
+          backdropFilter: 'blur(8px)',
+          // background: theme.palette.background.default,
+          // remove box shadow
+          boxShadow: 'none',
+          }}
+      >
         <Toolbar disableGutters sx={{ display: "flex", justifyContent: "end", pr: isMobile ? '0' : '4rem' }}>
           {isMobile ? (
             <>
@@ -79,7 +105,7 @@ function ResponsiveAppBar() {
             </>
           ) : (
             pages.map((page) => (
-              <StyledLink key={page} href={`#`} sx={{ ml: 2 }}>
+              <StyledLink key={page} href={`#`+page.toLowerCase().replace(" ", "")} sx={{ ml: 2 }} variant='h5' fontWeight={"bold"}>
                 {page}
               </StyledLink>
             ))
@@ -98,7 +124,7 @@ function ResponsiveAppBar() {
           }}
           PaperProps={{
             sx: {
-              background: theme.palette.customPalette.main,
+              background: theme.palette.background.default,
             },
           }}
         >

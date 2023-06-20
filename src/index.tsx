@@ -5,16 +5,16 @@ import reportWebVitals from './reportWebVitals';
 // add react router and 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
-import { ThemeProvider as StyledThemeProvider, createGlobalStyle } from 'styled-components';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
+import styled from 'styled-components';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
 root.render(
-  <React.StrictMode>
     <ThemeProvider theme={theme}>
       <StyledThemeProvider theme={theme}>
         <CssBaseline />
@@ -25,7 +25,6 @@ root.render(
         </Router>
       </StyledThemeProvider>
     </ThemeProvider>
-  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

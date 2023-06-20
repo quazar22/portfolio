@@ -3,8 +3,7 @@ import styled from "styled-components";
 
 const StyledAppBar = styled(AppBar)`
   && {
-    background-color: ${(props) => props.theme.palette.customPalette.main};
-    color: ${(props) => props.theme.palette.primary.main};
+    background-color: ${(props) => props.theme.palette.primary.main};
     display: inline-block;
     white-space: nowrap;
     text-decoration: none;
@@ -18,7 +17,6 @@ const StyledAppBar = styled(AppBar)`
     box-shadow: none;
     outline: none;
     // make app bar sticky
-    position: sticky;
 `;
 
 export default StyledAppBar;
