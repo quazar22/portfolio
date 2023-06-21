@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 // add react router and 
@@ -9,23 +10,24 @@ import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
 import AnimatedBackground from './Components/AnimatedBackground';
+import FloatingSquare from './Components/FloatingSquare';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
 root.render(
+
   <ThemeProvider theme={theme}>
     <StyledThemeProvider theme={theme}>
       <CssBaseline />
-        <AnimatedBackground />
       <Router>
         <Routes>
           <Route path="/" element={<App />} />
         </Routes>
       </Router>
-    </StyledThemeProvider>
-  </ThemeProvider>
+  </StyledThemeProvider>
+  </ThemeProvider >
 );
 
 // If you want to start measuring performance in your app, pass a function

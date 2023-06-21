@@ -36,8 +36,13 @@ const theme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          backgroundColor: '#041925',
-        },
+          backgroundColor: "#041925",
+          backgroundImage: 'linear-gradient(315deg, rgba(105,185,91,0.09567577030812324) 0%, rgba(4,25,37,1) 37%);',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+        }
       },
     },
     MuiTypography: {

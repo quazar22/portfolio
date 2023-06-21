@@ -1,22 +1,39 @@
+import React, { useState, useEffect } from 'react';
 import { Box, Grid, Typography, Container, Avatar } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import hexToRgbA from '../utils/hexToRgba';
+import { appBarHeight } from '../utils/appBarHeight';
 
 const AboutMe = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const appBarHeight = 64; // AppBar height. You can adjust this as needed.
+
+  const [myName, setMyName] = useState('Geoffrey Knox');
+  const [showUnderscore, setShowUnderscore] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowUnderscore(prevShowUnderscore => !prevShowUnderscore);
+    }, 500);
+
+    // Don't forget to clear your interval on component unmount to prevent memory leaks
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+
   return (
     <Container maxWidth="lg" id="aboutme"
-    sx={{
-      minHeight: `calc(100vh - ${appBarHeight}px)`
-    }}
+      sx={{
+        minHeight: `calc(100vh - ${appBarHeight}px)`
+      }}
     >
       <Grid container spacing={2} mt={isMobile ? 8 : 16} alignItems={"center"}>
         <Grid item xs={12} md={6}>
           <Grid container direction="column" alignItems="center">
-            <Typography variant={isMobile ? "h4" : "h3"}>Geoffrey Knox</Typography>
+            <Typography variant={isMobile ? "h4" : "h3"}>{myName}<span style={{ opacity: showUnderscore ? "1" : "0" }}>_</span></Typography>
             <Typography variant={isMobile ? "h5" : "h5"}>Software Engineer</Typography>
             <Avatar
               src={'/pics/me.jpg'}
