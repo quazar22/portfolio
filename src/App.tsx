@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import ResponsiveAppBar from './Components/ResponsiveAppBar';
 import { Box, Grid, Typography, Container, Avatar } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
@@ -8,11 +8,20 @@ import AboutMe from './Components/AboutMe';
 import Experience from './Components/Experience';
 import Education from './Components/Education';
 import Contact from './Components/Contact';
+import { pageIds } from './pages';
 
 function App() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const appBarHeight = 64; // AppBar height. You can adjust this as needed.
+
+  const sectionRefs = useRef<(HTMLElement | null)[]>([]); // use this in the future to get the current section
+
+  const aboutRef = useRef<null | HTMLDivElement>(null);
+  const experienceRef = useRef<null | HTMLDivElement>(null);
+  const educationRef = useRef<null | HTMLDivElement>(null);
+  const contactRef = useRef<null | HTMLDivElement>(null);
+  const [currentSection, setCurrentSection] = useState<string>("");
 
   const scrollTo = (event: MouseEvent) => {
     event.preventDefault();
@@ -43,6 +52,45 @@ function App() {
       links.forEach(link => {
         link.removeEventListener('click', scrollTo);
       });
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          let id = entry.target.children[0].id;
+          if (entry.isIntersecting) {
+            console.log(`Element with id '${id}' is now inside the viewport`);
+            setCurrentSection(id);
+          } else {
+            console.log(`Element with id '${id}' is now outside the viewport`);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(aboutRef.current as HTMLDivElement);
+    observer.observe(experienceRef.current as HTMLDivElement);
+    observer.observe(educationRef.current as HTMLDivElement);
+    observer.observe(contactRef.current as HTMLDivElement);
+
+    // on first load, scroll to the top of the page and set the current section to the first section ("aboutme")
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+    setCurrentSection(pageIds[0]);
+    console.log("default current section: " + pageIds[0])
+
+    return () => {
+      observer.unobserve(aboutRef.current as HTMLDivElement);
+      observer.unobserve(experienceRef.current as HTMLDivElement);
+      observer.unobserve(educationRef.current as HTMLDivElement);
+      observer.unobserve(contactRef.current as HTMLDivElement);
+
+      observer.disconnect();
     };
   }, []);
 
@@ -77,11 +125,11 @@ function App() {
           minHeight: '100vh',
         }}
       >
-        <ResponsiveAppBar />
-        <AboutMe />
-        <Experience />
-        <Education />
-        <Contact />
+        <ResponsiveAppBar currentSection={currentSection} />
+        <div ref={aboutRef}><AboutMe /></div>
+        <div ref={experienceRef}><Experience /></div>
+        <div ref={educationRef}><Education /></div>
+        <div ref={contactRef}><Contact /></div>
       </Box>
     </>
   );

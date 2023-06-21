@@ -23,7 +23,6 @@ const AboutMe = () => {
     };
   }, []);
 
-
   return (
     <Container maxWidth="lg" id="aboutme"
       sx={{

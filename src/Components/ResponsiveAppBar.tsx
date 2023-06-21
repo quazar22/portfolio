@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Drawer from '@mui/material/Drawer';
@@ -12,50 +12,36 @@ import ListItemText from '@mui/material/ListItemText';
 import List from '@mui/material/List';
 import StyledLink from './StyledLink';
 import hexToRgbA from '../utils/hexToRgba';
+import { getPageId } from '../pages';
 
-const pages = ['About Me', 'Experience', 'Education', 'Contact'];
+import { pages } from '../pages';
+
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const createPageId = (page: string) => page.toLowerCase().replace(" ", "");
-
-const pageIds = pages.map(page => createPageId(page));
-
-function ResponsiveAppBar() {
+function ResponsiveAppBar(props: { currentSection: string }) {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [showBar, setShowBar] = useState(true);
   const [scrollPosition, setScrollPosition] = useState(0);
 
   const checkScroll = () => {
-    const currentScrollPos = window.scrollY;
+    let currentScrollPos = window.scrollY;
+    
     const isShow = scrollPosition > currentScrollPos;
     setShowBar(isShow);
     setScrollPosition(currentScrollPos);
   };
 
-
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
-  const [currentSection, setCurrentSection] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const getAppbarLinkById = (id: string) => {
+    return document.getElementById(id + "_link");
   };
 
   useEffect(() => {
@@ -71,7 +57,28 @@ function ResponsiveAppBar() {
       <List>
         {pages.map((page) => (
           <ListItem key={page}>
-            <StyledLink href={`#`}>
+            <StyledLink href={`#` + getPageId(page)} onClick={(event) => {
+              event.preventDefault();
+              console.log(event);
+              // scroll to the section
+              const targetElement = event.target as HTMLAnchorElement;
+              // find the closest parent element with href attribute
+              let a = targetElement.parentElement?.parentElement?.getAttribute('href');
+              if (a) {
+                const target = document.querySelector<HTMLElement>(a);
+                if (target) {
+                  const targetPosition = target.offsetTop;
+                  const offsetPosition = targetPosition - 64;
+
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                  });
+                }
+              }
+              // close the drawer
+              setMobileOpen(false);
+            }}>
               <ListItemText primary={page} sx={{ margin: "0" }} />
             </StyledLink>
           </ListItem>
@@ -109,7 +116,7 @@ function ResponsiveAppBar() {
             </>
           ) : (
             pages.map((page) => (
-              <StyledLink key={page} href={`#` + createPageId(page)} sx={{ ml: 2 }} variant='h5' fontWeight={"bold"}>
+              <StyledLink key={page} id={getPageId(page) + "_link"} href={`#` + getPageId(page)} sx={{ ml: 2 }} variant='h5' fontWeight={"bold"}>
                 {page}
               </StyledLink>
             ))
