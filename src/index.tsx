@@ -18,8 +18,8 @@ root.render(
   <ThemeProvider theme={theme}>
     <StyledThemeProvider theme={theme}>
       <CssBaseline />
-      <Router>
         <AnimatedBackground />
+      <Router>
         <Routes>
           <Route path="/" element={<App />} />
         </Routes>

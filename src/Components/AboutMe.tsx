@@ -37,7 +37,7 @@ const AboutMe = () => {
         <Grid item xs={12} md={6} p={2}>
           <Typography
             variant="body1"
-            textAlign={"center"}
+            textAlign={"left"}
             sx={{
               p: 2,
               border: '1px solid ' + theme.palette.primary.main,
@@ -54,7 +54,7 @@ const AboutMe = () => {
           </Typography>
           <Typography
             variant="body1"
-            textAlign={"center"}
+            textAlign={"left"}
             mt={2}
             sx={{
               p: 2,

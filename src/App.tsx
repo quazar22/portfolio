@@ -47,6 +47,14 @@ function App() {
     <>
       <ResponsiveAppBar />
       <AboutMe />
+      <Filler />
+      <Filler />
+      <Filler />
+      <Filler />
+      <Filler />
+      <Filler />
+      <Filler />
+      <Filler />
     </>
   );
 }

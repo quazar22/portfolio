@@ -1,86 +1,60 @@
 import React, { PropsWithChildren, useEffect, useState } from 'react';
-import { animated, useSpring } from '@react-spring/web';
+import { useSpring, animated } from '@react-spring/web';
 
-const getRandomInt = (min: number, max: number) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
-interface AnimatedSquareProps {
-  key: number;
-  initialX: number;
-  initialY: number;
-  onEnd: () => void;
-}
-
-const AnimatedSquare: React.FC<AnimatedSquareProps> = ({ key, initialX, initialY, onEnd }) => {
-  const randomSize = getRandomInt(20, 100);
-  const randomRotation = getRandomInt(0, 360);
-  // create a random to coordinate to animate to that is within the window
-  let toCoordinateX = getRandomInt(0, window.innerWidth - 100);
-  let toCoordinateY = getRandomInt(0, window.innerHeight - 100);
-
-  // get midpoint between initial and to coordinates
-  let midpointX = (initialX + toCoordinateX) / 2;
-  let midpointY = (initialY + toCoordinateY) / 2;
-  // divide rotation by 2 to make it smooth between the two points
-  let midpointRotation = randomRotation / 2;
-  
-  const props = useSpring({
-    from: { x: initialX, y: initialY, opacity: 0, rotateZ: '0deg', width: `${randomSize}px`, height: `${randomSize}px` },
-    to: [
-      { x: midpointX, y: midpointY, opacity: 1, rotateZ: `${180}deg` },
-      { x: toCoordinateX, y: toCoordinateY, opacity: 0, rotateZ: `${180}deg` }
-    ],
-    config: { duration: 5000 },
-    onRest: onEnd
+// Square component with continuous rotation
+const AnimatedSquare: React.FC<{ size: number, rotation: number, position: any }> = 
+    ({ size, rotation, position }) => {
+  const { x, y } = useSpring({
+    from: { x: 0, y: 0 },
+    to: { x: 1, y: position.top },
+    config: { duration: rotation },
+    loop: true
   });
 
   return (
     <animated.div
       style={{
-        ...props,
-        position: 'absolute',
+        width: size,
+        height: size,
         backgroundColor: 'rgba(255, 255, 255, 0.15)',
+        position: 'absolute',
+        top: y.to((y : any) => `${y}px`),
+        left: position.left,
+        transform: x.to({
+          range: [0, 100],
+          output: ["0deg", "360deg"]
+        }).to(value => `rotate(${value})`),
+        willChange: 'transform, top'
       }}
     />
   );
 };
 
-const AnimatedBackground: React.FC = ({ children }: PropsWithChildren) => {
-  const [queue, setQueue] = useState<{ id: number, initialX: number, initialY: number }[]>([]);
+const BackgroundSquares: React.FC = ({ children }: PropsWithChildren) => {
+  const [scrollY, setScrollY] = useState(0);
 
+  // Listen to scroll events
   useEffect(() => {
-    const interval = setInterval(() => {
-      setQueue(prev => [...prev, {
-        id: Date.now(),
-        initialX: getRandomInt(0, window.innerWidth - 100),
-        initialY: getRandomInt(0, window.innerHeight - 100)
-      }]);
-    }, 4500);
-
-    return () => clearInterval(interval);
+    const handleScroll = () => {
+      setScrollY(window.pageYOffset);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleAnimationEnd = (id: number) => {
-    setQueue(prev => prev.filter(item => item.id !== id));
+  const position = {
+    top: window.innerHeight * 0.65 + scrollY,
+    left: window.innerWidth * 0.65
   };
 
   return (
-    <div style={{ position: 'relative' }}>
-      {queue.map(({ id, initialX, initialY }) => (
-        <AnimatedSquare 
-          key={id} 
-          initialX={initialX} 
-          initialY={initialY} 
-          onEnd={() => handleAnimationEnd(id)}
-        />
-      ))}
+    <div style={{ position: 'absolute', height: '100vh' }}>
+      <AnimatedSquare size={50} rotation={20000} position={position} />
+      <AnimatedSquare size={50} rotation={25000} position={position} />
+      <AnimatedSquare size={50} rotation={30000} position={position} />
       {children}
     </div>
   );
 };
 
-export default AnimatedBackground;
-
+export default BackgroundSquares;
