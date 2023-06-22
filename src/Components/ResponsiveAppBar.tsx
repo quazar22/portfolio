@@ -19,8 +19,6 @@ import { pages } from '../pages';
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar(props: { currentSection: string }) {
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [showBar, setShowBar] = useState(true);
   const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -42,6 +40,8 @@ function ResponsiveAppBar(props: { currentSection: string }) {
 
   const getAppbarLinkById = (id: string) => {
     return document.getElementById(id + "_link");
+    //query selector for anchor tags with hrefs that start with #
+    // return document.querySelector('a[href^="#"]');
   };
 
   useEffect(() => {
@@ -116,7 +116,27 @@ function ResponsiveAppBar(props: { currentSection: string }) {
             </>
           ) : (
             pages.map((page) => (
-              <StyledLink key={page} id={getPageId(page) + "_link"} href={`#` + getPageId(page)} sx={{ ml: 2 }} variant='h5' fontWeight={"bold"}>
+              <StyledLink key={page} id={getPageId(page) + "_link"} href={`#` + getPageId(page)} sx={{ ml: 2 }} variant='h5' fontWeight={"bold"}
+                onClick={(event) => {
+                  event.preventDefault();
+                  // scroll to the section
+                  const targetElement = event.target as HTMLAnchorElement;
+                  let a = targetElement.getAttribute('href');
+                  console.log(event);
+                  if (a) {
+                    const target = document.querySelector<HTMLElement>(a);
+                    if (target) {
+                      const targetPosition = target.offsetTop;
+                      const offsetPosition = targetPosition - 64;
+
+                      window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                      });
+                    }
+                  }
+                }}
+              >
                 {page}
               </StyledLink>
             ))
