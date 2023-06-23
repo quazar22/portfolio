@@ -69,7 +69,6 @@ const Experience = () => {
         <TabPanel value={value} index={0}>
           <Experiences.Tenzinc />
         </TabPanel>
-
         <TabPanel value={value} index={1}>
           <Experiences.NVTGroup />
         </TabPanel>

@@ -23,10 +23,26 @@ const AboutMe = () => {
     };
   }, []);
 
+  const BioBoxStyle = () => {
+    return (
+      {
+        p: 2,
+        border: '1px solid ' + hexToRgbA(theme.palette.primary.main, 0.3),
+        borderRadius: '10px',
+        transition: 'border-color 0.15s ease-in-out, background-color 0.15s ease-in-out',
+        '&:hover': {
+          borderColor: hexToRgbA(theme.palette.background.default, 0.3),
+          backgroundColor: hexToRgbA(theme.palette.customPalette.dark, 0.3),
+          boxShadow: '0 0 10px 5px ' + hexToRgbA(theme.palette.primary.main, 0.3),
+        },
+      }
+    )
+  }
+
   return (
     <Container maxWidth="lg" id="aboutme"
       sx={{
-        minHeight: `calc(100vh - ${appBarHeight}px)`
+        minHeight: `calc(80vh - ${appBarHeight}px)`
       }}
     >
       <Grid container spacing={2} mt={isMobile ? 8 : 16} alignItems={"center"}>
@@ -44,7 +60,7 @@ const AboutMe = () => {
                 transition: 'transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
                 '&:hover': {
                   transform: 'scale(1.05)',
-                  boxShadow: '0 0 10px 5px ' + hexToRgbA(theme.palette.primary.main, 0.75),
+                  boxShadow: '0 0 10px 5px ' + hexToRgbA(theme.palette.primary.main, 0.5),
                 },
               }}
             />
@@ -54,17 +70,7 @@ const AboutMe = () => {
           <Typography
             variant="body1"
             textAlign={"left"}
-            sx={{
-              p: 2,
-              border: '1px solid ' + theme.palette.primary.main,
-              borderRadius: '10px',
-              transition: 'border-color 0.15s ease-in-out, background-color 0.15s ease-in-out',
-              '&:hover': {
-                borderColor: hexToRgbA(theme.palette.primary.main, 0.5),
-                backgroundColor: theme.palette.background.paper,
-                boxShadow: '0 0 10px 5px ' + hexToRgbA(theme.palette.primary.main, 0.5),
-              },
-            }}
+            sx={BioBoxStyle()}
           >
             Hello, I'm a dedicated software engineer currently residing in Glasgow, Scotland. My experience spans both frontend and backend development, with an affinity for learning and applying diverse technologies and languages.
           </Typography>
@@ -72,17 +78,7 @@ const AboutMe = () => {
             variant="body1"
             textAlign={"left"}
             mt={2}
-            sx={{
-              p: 2,
-              border: '1px solid ' + theme.palette.primary.main,
-              borderRadius: '10px',
-              transition: 'border-color 0.15s ease-in-out, background-color 0.15s ease-in-out',
-              '&:hover': {
-                borderColor: theme.palette.primary.main,
-                backgroundColor: theme.palette.background.paper,
-                boxShadow: '0 0 10px 5px ' + hexToRgbA(theme.palette.primary.main, 0.5),
-              },
-            }}
+            sx={BioBoxStyle()}
           >
             My wife and I relocated from the United States to Scotland in 2020 for her to undertake her Doctor of Veterinary Medicine studies at the University of Glasgow. This move not only widened my cultural perspective but also enriched my professional journey. I've found that a remote work setting aligns best with my preference for flexibility and focus. Now, I'm actively on the lookout for new remote opportunities worldwide, ready to bring my skill set to new challenges.
           </Typography>

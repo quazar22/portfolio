@@ -1,7 +1,15 @@
 import { Grid, Typography, Chip, Container } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { PropsWithChildren } from "react";
 
+const ExperienceChips = ({ children }: PropsWithChildren) => {
+  return (
+    <Grid item container direction="row" alignItems="center" justifyContent={"center"} rowGap={1} columnGap={1} mt={4}>
+      {children}
+    </Grid>
+  )
+}
 
 export const Tenzinc = () => {
   const theme = useTheme();
@@ -24,18 +32,18 @@ export const Tenzinc = () => {
                 <Typography variant='h6' fontWeight={"bold"}>Glasgow, Scotland, UK</Typography>
               </>
             }
-            <Grid item container direction="row" alignItems="center" justifyContent={"center"} rowGap={2} columnGap={2} mt={4}>
-              <Chip label={"Typescript"} />
-              <Chip label={"Javascript"} />
-              <Chip label={"HTML/CSS"} />
-              <Chip label={"Material UI"} />
-              <Chip label={"ReactJS"} />
-              <Chip label={"PostgreSQL"} />
-              <Chip label={"Firebase"} />
-              <Chip label={"Python"} />
-              <Chip label={"C#"} />
+            <ExperienceChips>
               <Chip label={".NET"} />
-            </Grid>
+              <Chip label={"C#"} />
+              <Chip label={"Firebase"} />
+              <Chip label={"HTML/CSS"} />
+              <Chip label={"Javascript"} />
+              <Chip label={"Material UI"} />
+              <Chip label={"PostgreSQL"} />
+              <Chip label={"Python"} />
+              <Chip label={"ReactJS"} />
+              <Chip label={"Typescript"} />
+            </ExperienceChips>
           </Grid>
         </Grid>
       </Grid>
@@ -69,14 +77,14 @@ export const NVTGroup = () => {
                 <Typography variant='h6' fontWeight={"bold"}>Glasgow, Scotland, UK</Typography>
               </>
             }
-            <Grid item container direction="row" alignItems="center" justifyContent={"center"} rowGap={2} columnGap={2} mt={4}>
-              <Chip label={"Javascript"} />
+            <ExperienceChips>
+              <Chip label={".NET"} />
+              <Chip label={"C#"} />
               <Chip label={"HTML/CSS"} />
+              <Chip label={"Javascript"} />
               <Chip label={"MSSQL"} />
               <Chip label={"Python"} />
-              <Chip label={"C#"} />
-              <Chip label={".NET"} />
-            </Grid>
+            </ExperienceChips>
           </Grid>
         </Grid>
       </Grid>
@@ -110,14 +118,14 @@ export const GreenthumbAutomation = () => {
                 <Typography variant='h6' fontWeight={"bold"}>Albuquerque, New Mexico, United States</Typography>
               </>
             }
-            <Grid item container direction="row" alignItems="center" justifyContent={"center"} rowGap={2} columnGap={2} mt={4}>
-              <Chip label={"PHP"} />
-              <Chip label={"Java"} />
-              <Chip label={"Swift"} />
-              <Chip label={"Python"} />
-              <Chip label={"Javascript"} />
+            <ExperienceChips>
               <Chip label={"HTML/CSS"} />
-            </Grid>
+              <Chip label={"Java"} />
+              <Chip label={"Javascript"} />
+              <Chip label={"PHP"} />
+              <Chip label={"Python"} />
+              <Chip label={"Swift"} />
+            </ExperienceChips>
           </Grid>
         </Grid>
       </Grid>
@@ -141,32 +149,32 @@ export const TraxInternational = () => {
             {isMobile ?
               <>
                 <Typography variant='h5' fontWeight={"bold"}>TRAX International</Typography>
-                <Typography variant='h6' fontWeight={"bold"}>Software Developer</Typography>
+                <Typography variant='h6' fontWeight={"bold"}>Software Development Intern</Typography>
                 <Typography variant='h6' fontWeight={"bold"}>June 2017 - Dec 2019</Typography>
                 <Typography variant='h6' fontWeight={"bold"}>White Sands Missile Range, NM, US</Typography>
               </>
               :
               <>
-                <Typography variant='h5' fontWeight={"bold"}>TRAX International, Software Developer from Nov 2020 - Dec 2021</Typography>
+                <Typography variant='h5' fontWeight={"bold"}>TRAX International, Software Development Intern from June 2017 - December 2019</Typography>
                 <Typography variant='h6' fontWeight={"bold"}>White Sands Missile Range, NM, US</Typography>
               </>
             }
-            <Grid item container direction="row" alignItems="center" justifyContent={"center"} rowGap={2} columnGap={2} mt={4}>
-              <Chip label={"HTML/CSS"} />
+            <ExperienceChips>
               <Chip label={"C#"} />
+              <Chip label={"C++"} />
+              <Chip label={"HTML/CSS"} />
               <Chip label={"Java"} />
               <Chip label={"Python"} />
-              <Chip label={"C++"} />
               <Chip label={"Qt"} />
-            </Grid>
+            </ExperienceChips>
           </Grid>
         </Grid>
       </Grid>
       <Grid item xs={12} md={12}>
-        <Typography variant='body1' mt={4}>At Tenzinc Ltd since December 2021, as a Software Engineer, I've been involved in developing technology services using various web technologies. I work with experts to capture project requirements and define technology details.</Typography>
-        <Typography variant='body1' mt={4}>My role includes backend and frontend infrastructure development, encompassing multiple microservices and test frontends. I write tests for these microservices to ensure their proper functioning.</Typography>
-        <Typography variant='body1' mt={4}>I use TypeScript, ReactJS, C#, SQL, and Firebase for full-stack development, making use of features like Realtime Database, Firestore, and more.</Typography>
-        <Typography variant='body1' mt={4}>I also work with clients to create custom applications, and use Azure DevOps for version control, CI/CD, and applying agile methods.</Typography>
+        <Typography variant='body1' mt={2}>Assisted on multiple projects during undergraduate degree including network engineering and software engineering projects for TRAX Intl. telemetry department.</Typography>
+        <Typography variant='body1' mt={2}>Added functionality to internal software tools for secure video file handling and object tracking using C++, Qt, Python, and Java.</Typography>
+        <Typography variant='body1' mt={2}>Worked in the Management Information Systems department maintaining web interfaces for the tracking of project spending and assets for the company using a combination of K2 Blackpearl, C#, and T-SQL.</Typography>
+        <Typography variant='body1' mt={2}>Joined in sprints and collaborated with full time employees to deliver projects on time.</Typography>
       </Grid>
     </>
   )
@@ -184,31 +192,31 @@ export const Webmaster = () => {
               <>
                 <Typography variant='h5' fontWeight={"bold"}>NVT Group</Typography>
                 <Typography variant='h6' fontWeight={"bold"}>Software Developer</Typography>
-                <Typography variant='h6' fontWeight={"bold"}>Nov 2020 - Dec 2021</Typography>
-                <Typography variant='h6' fontWeight={"bold"}>Albuquerque, NM, US</Typography>
+                <Typography variant='h6' fontWeight={"bold"}>Mar 2016 - Jan 2018</Typography>
+                <Typography variant='h6' fontWeight={"bold"}>Socorro, NM, US</Typography>
               </>
               :
               <>
-                <Typography variant='h5' fontWeight={"bold"}>NVT Group, Software Developer from Nov 2020 - Dec 2021</Typography>
-                <Typography variant='h6' fontWeight={"bold"}>Albuquerque, New Mexico, United States</Typography>
+                <Typography variant='h5' fontWeight={"bold"}>NVT Group, Software Developer from March 2016 - January 2018</Typography>
+                <Typography variant='h6' fontWeight={"bold"}>Socorro, New Mexico, United States</Typography>
               </>
             }
-            <Grid item container direction="row" alignItems="center" justifyContent={"center"} rowGap={2} columnGap={2} mt={4}>
-              <Chip label={"PHP"} />
-              <Chip label={"Java"} />
-              <Chip label={"Swift"} />
-              <Chip label={"Python"} />
-              <Chip label={"Javascript"} />
+            <ExperienceChips>
               <Chip label={"HTML/CSS"} />
-            </Grid>
+              <Chip label={"Java"} />
+              <Chip label={"Javascript"} />
+              <Chip label={"PHP"} />
+              <Chip label={"Python"} />
+              <Chip label={"Swift"} />
+            </ExperienceChips>
           </Grid>
         </Grid>
       </Grid>
       <Grid item xs={12} md={12}>
-        <Typography variant='body1' mt={4}>At Tenzinc Ltd since December 2021, as a Software Engineer, I've been involved in developing technology services using various web technologies. I work with experts to capture project requirements and define technology details.</Typography>
-        <Typography variant='body1' mt={4}>My role includes backend and frontend infrastructure development, encompassing multiple microservices and test frontends. I write tests for these microservices to ensure their proper functioning.</Typography>
-        <Typography variant='body1' mt={4}>I use TypeScript, ReactJS, C#, SQL, and Firebase for full-stack development, making use of features like Realtime Database, Firestore, and more.</Typography>
-        <Typography variant='body1' mt={4}>I also work with clients to create custom applications, and use Azure DevOps for version control, CI/CD, and applying agile methods.</Typography>
+        <Typography variant='body1' mt={2}>At Tenzinc Ltd since December 2021, as a Software Engineer, I've been involved in developing technology services using various web technologies. I work with experts to capture project requirements and define technology details.</Typography>
+        <Typography variant='body1' mt={2}>My role includes backend and frontend infrastructure development, encompassing multiple microservices and test frontends. I write tests for these microservices to ensure their proper functioning.</Typography>
+        <Typography variant='body1' mt={2}>I use TypeScript, ReactJS, C#, SQL, and Firebase for full-stack development, making use of features like Realtime Database, Firestore, and more.</Typography>
+        <Typography variant='body1' mt={2}>I also work with clients to create custom applications, and use Azure DevOps for version control, CI/CD, and applying agile methods.</Typography>
       </Grid>
     </>
   )
