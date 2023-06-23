@@ -57,12 +57,12 @@ const Experience = () => {
     >
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} onChange={handleChange} aria-label="tabs" variant='scrollable' allowScrollButtonsMobile sx={{boxShadow: "none"}}>
-            <Tab label={heavyTypography("Tenzinc Ltd")} {...a11yProps(0)} sx={{ textTransform: "none" }} disableRipple />
-            <Tab label={heavyTypography("NVT Group")} {...a11yProps(1)} sx={{ textTransform: "none" }} disableRipple />
-            <Tab label={heavyTypography("Greenthumb Automation")} {...a11yProps(2)} sx={{ textTransform: "none" }} disableRipple />
-            <Tab label={heavyTypography("TRAX International")} {...a11yProps(3)} sx={{ textTransform: "none" }} disableRipple />
-            <Tab label={heavyTypography("Webmaster at NMT")} {...a11yProps(4)} sx={{ textTransform: "none" }} disableRipple />
+          <Tabs value={value} onChange={handleChange} aria-label="tabs" variant='scrollable' allowScrollButtonsMobile sx={{  }}>
+            <Tab label={heavyTypography("Tenzinc Ltd")} {...a11yProps(0)} sx={{ textTransform: "none" }} />
+            <Tab label={heavyTypography("NVT Group")} {...a11yProps(1)} sx={{ textTransform: "none" }} />
+            <Tab label={heavyTypography("Greenthumb Automation")} {...a11yProps(2)} sx={{ textTransform: "none" }} />
+            <Tab label={heavyTypography("TRAX International")} {...a11yProps(3)} sx={{ textTransform: "none" }} />
+            <Tab label={heavyTypography("Webmaster at NMT")} {...a11yProps(4)} sx={{ textTransform: "none" }} />
           </Tabs>
         </Box>
 

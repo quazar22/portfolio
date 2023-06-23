@@ -90,43 +90,54 @@ const theme = createTheme({
       },
     },
     MuiTabs: {
-      styleOverrides: {
-        root: {
-          color: brandColor,
-          border: "none",
-          boxShadow: "none",
-          // remove border
-          // remove box shadow
-          outline: "none",
-          // smooth transition on focus and raise brightness and add
-          '&:focus': {
-            boxShadow: "none",
-            outline: "none",
-          },
-        }
-      }
+      // styleOverrides: {
+      //   root: {
+      //     color: brandColor,
+      //     border: "none",
+      //     boxShadow: "none",
+      //     // remove border
+      //     // remove box shadow
+      //     outline: "none",
+      //     // smooth transition on focus and raise brightness and add
+      //     '&:focus': {
+      //       boxShadow: "none",
+      //       outline: "none",
+      //     },
+      //   }
+      // }
     },
     MuiButtonBase: {
       styleOverrides: {
-        root: {
-          boxShadow: "none",
-          outline: "none",
-          '&:focus': {
-            boxShadow: "none",
-            outline: "none",
-          },
-          disableRipple: true,
+        root: { // Name of the rule
+          // overflow: 'visible', // Fix IE 11 issue
+          // '&:active': {
+          //   boxShadow: '0 0 10px 2px lime', // Add a green shadow on click
+          //   filter: 'brightness(105%)' // Increase brightness by 5%
+          // },
+          // '&:hover': {
+          //   boxShadow: '0 0 10px 2px lime', // Add a green shadow on hover
+          //   filter: 'brightness(105%)' // Increase brightness by 5%
+          // },
         }
       }
     },
     MuiTab: {
       styleOverrides: {
         root: {
-          boxShadow: "none",
-          outline: "none",
-          '&:focus': {
-            boxShadow: "none",
-            outline: "none",
+          '&:hover': {
+            // Increase brightness by 5% and add shadow on hover
+            boxShadow: 'none',
+            borderRadius: '20px',
+
+            // first child add border radius
+            '& .MuiTypography-root': {
+              // backgroundImage: "radial-gradient(circle, rgba(105,185,91,1) 11%, rgba(4,25,37,1) 100%);",
+              // boxShadow: "0 0 10px 2px lime",
+              filter: "drop-shadow(0 0 0.55rem " + brandColor + ")",  // apply a blur filter
+            }
+          },
+          '& .MuiTouchRipple-root': {
+            display: 'none'
           },
         }
       }
