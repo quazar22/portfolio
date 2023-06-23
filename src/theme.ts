@@ -1,6 +1,8 @@
 import { createTheme } from '@mui/material/styles';
+import hexToRgbA from './utils/hexToRgba';
 
 let brandColor = '#69b95b';
+let paperColor = '#083249';
 // A custom theme for this app
 const theme = createTheme({
   palette: {
@@ -15,7 +17,7 @@ const theme = createTheme({
     },
     background: {
       default: '#041925',
-      paper: '#083249'
+      paper: paperColor
     },
     text: {
       primary: '#e3f3fc',
@@ -73,6 +75,61 @@ const theme = createTheme({
           color: brandColor,
         },
       },
+    },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          color: brandColor,
+          backgroundColor: paperColor,
+          transition: 'all 0.3s ease',  // Smooth transition on hover
+          '&:hover': {
+            boxShadow: '0px 0px 10px 4px ' + hexToRgbA(brandColor, 0.5),  // Add shadow on hover
+            transform: 'scale(1.05)',  // Grow size by 5% on hover
+          },
+        },
+      },
+    },
+    MuiTabs: {
+      styleOverrides: {
+        root: {
+          color: brandColor,
+          border: "none",
+          boxShadow: "none",
+          // remove border
+          // remove box shadow
+          outline: "none",
+          // smooth transition on focus and raise brightness and add
+          '&:focus': {
+            boxShadow: "none",
+            outline: "none",
+          },
+        }
+      }
+    },
+    MuiButtonBase: {
+      styleOverrides: {
+        root: {
+          boxShadow: "none",
+          outline: "none",
+          '&:focus': {
+            boxShadow: "none",
+            outline: "none",
+          },
+          disableRipple: true,
+        }
+      }
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          boxShadow: "none",
+          outline: "none",
+          '&:focus': {
+            boxShadow: "none",
+            outline: "none",
+          },
+        }
+      }
     },
   },
 });
