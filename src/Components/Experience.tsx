@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { Container, Box, Tabs, Tab, Typography, Grid, Chip } from '@mui/material';
 import { appBarHeight } from '../utils/appBarHeight';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import heavyTypography from '../utils/heavyTypography';
 import * as Experiences from './JobExperiences';
+import hexToRgbA from '../utils/hexToRgba';
 
 
 interface TabPanelProps {
@@ -44,6 +45,15 @@ const Experience = () => {
   const [value, setValue] = React.useState(0);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const smallerThanLg = useMediaQuery(theme.breakpoints.down('lg'));
+
+  var items = [
+    <Experiences.Tenzinc />,
+    <Experiences.NVTGroup />,
+    <Experiences.GreenthumbAutomation />,
+    <Experiences.TraxInternational />,
+    <Experiences.Webmaster />
+  ]
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -52,17 +62,16 @@ const Experience = () => {
   return (
     <Container maxWidth="lg" id="experience"
       sx={{
-        minHeight: `calc(100vh - ${appBarHeight}px)`
       }}
     >
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} onChange={handleChange} aria-label="tabs" variant='scrollable' allowScrollButtonsMobile sx={{  }}>
+          <Tabs value={value} onChange={handleChange} aria-label="tabs" variant={smallerThanLg ? 'scrollable' : 'standard'} allowScrollButtonsMobile sx={{  }} centered>
             <Tab label={heavyTypography("Tenzinc Ltd")} {...a11yProps(0)} sx={{ textTransform: "none" }} />
             <Tab label={heavyTypography("NVT Group")} {...a11yProps(1)} sx={{ textTransform: "none" }} />
             <Tab label={heavyTypography("Greenthumb Automation")} {...a11yProps(2)} sx={{ textTransform: "none" }} />
             <Tab label={heavyTypography("TRAX International")} {...a11yProps(3)} sx={{ textTransform: "none" }} />
-            <Tab label={heavyTypography("Webmaster at NMT")} {...a11yProps(4)} sx={{ textTransform: "none" }} />
+            <Tab label={heavyTypography("NM Tech")} {...a11yProps(4)} sx={{ textTransform: "none" }} />
           </Tabs>
         </Box>
 
@@ -83,8 +92,46 @@ const Experience = () => {
         </TabPanel>
       </Box>
 
+      {/* <Carousel
+        animation='slide'
+        autoPlay={false}
+      >
+        {
+          items.map((item, i) => <Item key={i}> {item} </Item>)
+        }
+      </Carousel> */}
+
     </Container>
   );
+}
+
+function Item({ children }: PropsWithChildren) {
+  const theme = useTheme();
+  return (
+    <Box
+      minHeight={"100vh"}
+    >
+
+      <Box
+        height={"100%"}
+        sx={{
+          p: 2,
+          border: '1px solid ' + hexToRgbA(theme.palette.primary.main, 0.3),
+          borderRadius: '10px',
+          transition: 'border-color 0.15s ease-in-out, background-color 0.15s ease-in-out',
+          '&:hover': {
+            borderColor: hexToRgbA(theme.palette.background.default, 0.3),
+            backgroundColor: hexToRgbA(theme.palette.customPalette.dark, 0.3),
+          },
+        }}
+      >
+        {children}
+        {/* <h2>{props.item.name}</h2>
+      <p>{props.item.description}</p> */}
+      </Box>
+
+    </Box>
+  )
 }
 
 export default Experience;

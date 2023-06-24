@@ -126,7 +126,7 @@ function App() {
         }}
       >
         <ResponsiveAppBar currentSection={currentSection} />
-        <div ref={aboutRef}><AboutMe /></div>
+        <div ref={aboutRef} style={{marginBottom: isMobile ? "2rem" : "8rem"}}><AboutMe /></div>
         <div ref={experienceRef}><Experience /></div>
         <div ref={educationRef}><Education /></div>
         <div ref={contactRef}><Contact /></div>

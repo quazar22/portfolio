@@ -122,6 +122,7 @@ export const GreenthumbAutomation = () => {
               <Chip label={"HTML/CSS"} />
               <Chip label={"Java"} />
               <Chip label={"Javascript"} />
+              <Chip label={"MySQL"} />
               <Chip label={"PHP"} />
               <Chip label={"Python"} />
               <Chip label={"Swift"} />
@@ -131,8 +132,8 @@ export const GreenthumbAutomation = () => {
       </Grid>
       <Grid item xs={12} md={12}>
         <Typography variant='body1' mt={2}>At GreenThumb Automation in Albuquerque, New Mexico, I worked as a Software Developer from May 2020 to December 2020, focusing on agricultural technology integration.</Typography>
-        <Typography variant='body1' mt={2}>My responsibilities included Java development for an Android app, collaborating with management and clients to improve the app's functionality and user experience.</Typography>
-        <Typography variant='body1' mt={2}>To ensure efficient code management and collaboration, I used Git for version control and deployed app builds via Google Play. In addition, I rapidly acquired new programming skills, specifically in Objective-C, HTML, CSS, and JavaScript.</Typography>
+        <Typography variant='body1' mt={2}>My responsibilities included Java development for an Android app, collaborating with management and clients to improve the app's functionality and user experience. I also expanded application functionality by adding local user device integration, wrote PHP to communicate with MySQL to access device and user data.</Typography>
+        <Typography variant='body1' mt={2}>To ensure efficient code management and collaboration, I used Git for version control and deployed app builds via Google Play. In addition, I rapidly acquired new programming skills, specifically in Swift, HTML, CSS, and JavaScript.</Typography>
       </Grid>
     </>
   )
@@ -174,7 +175,7 @@ export const TraxInternational = () => {
         <Typography variant='body1' mt={2}>Assisted on multiple projects during undergraduate degree including network engineering and software engineering projects for TRAX Intl. telemetry department.</Typography>
         <Typography variant='body1' mt={2}>Added functionality to internal software tools for secure video file handling and object tracking using C++, Qt, Python, and Java.</Typography>
         <Typography variant='body1' mt={2}>Worked in the Management Information Systems department maintaining web interfaces for the tracking of project spending and assets for the company using a combination of K2 Blackpearl, C#, and T-SQL.</Typography>
-        <Typography variant='body1' mt={2}>Joined in sprints and collaborated with full time employees to deliver projects on time.</Typography>
+        <Typography variant='body1' mt={2}>Participated in sprints and collaborated with full time employees to deliver projects on time.</Typography>
       </Grid>
     </>
   )
@@ -190,14 +191,14 @@ export const Webmaster = () => {
           <Grid container direction="column" alignItems="center">
             {isMobile ?
               <>
-                <Typography variant='h5' fontWeight={"bold"}>NVT Group</Typography>
-                <Typography variant='h6' fontWeight={"bold"}>Software Developer</Typography>
+                <Typography variant='h5' fontWeight={"bold"}>New Mexico Tech</Typography>
+                <Typography variant='h6' fontWeight={"bold"}>Webmaster</Typography>
                 <Typography variant='h6' fontWeight={"bold"}>Mar 2016 - Jan 2018</Typography>
                 <Typography variant='h6' fontWeight={"bold"}>Socorro, NM, US</Typography>
               </>
               :
               <>
-                <Typography variant='h5' fontWeight={"bold"}>NVT Group, Software Developer from March 2016 - January 2018</Typography>
+                <Typography variant='h5' fontWeight={"bold"}>New Mexico Tech, Webmaster from March 2016 - January 2018</Typography>
                 <Typography variant='h6' fontWeight={"bold"}>Socorro, New Mexico, United States</Typography>
               </>
             }
@@ -207,16 +208,14 @@ export const Webmaster = () => {
               <Chip label={"Javascript"} />
               <Chip label={"PHP"} />
               <Chip label={"Python"} />
-              <Chip label={"Swift"} />
             </ExperienceChips>
           </Grid>
         </Grid>
       </Grid>
       <Grid item xs={12} md={12}>
-        <Typography variant='body1' mt={2}>At Tenzinc Ltd since December 2021, as a Software Engineer, I've been involved in developing technology services using various web technologies. I work with experts to capture project requirements and define technology details.</Typography>
-        <Typography variant='body1' mt={2}>My role includes backend and frontend infrastructure development, encompassing multiple microservices and test frontends. I write tests for these microservices to ensure their proper functioning.</Typography>
-        <Typography variant='body1' mt={2}>I use TypeScript, ReactJS, C#, SQL, and Firebase for full-stack development, making use of features like Realtime Database, Firestore, and more.</Typography>
-        <Typography variant='body1' mt={2}>I also work with clients to create custom applications, and use Azure DevOps for version control, CI/CD, and applying agile methods.</Typography>
+        <Typography variant='body1' mt={2}>Maintained websites for the Office of Student Learning. Wrote and reworked code in HTML, CSS, and Javascript based on requests and user need.</Typography>
+        <Typography variant='body1' mt={2}>Implemented quick bugfixes and performed large code refactors for better code reusability and easier deployment.</Typography>
+        <Typography variant='body1' mt={2}>Wrote backend services in PHP for managing and showing data on websites.</Typography>
       </Grid>
     </>
   )

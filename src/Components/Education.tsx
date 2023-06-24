@@ -6,7 +6,6 @@ const Education = () => {
   return (
     <Container maxWidth="lg" id="education"
       sx={{
-        minHeight: `calc(100vh - ${appBarHeight}px)`
       }}
     >
       

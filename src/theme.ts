@@ -3,6 +3,10 @@ import hexToRgbA from './utils/hexToRgba';
 
 let brandColor = '#69b95b';
 let paperColor = '#083249';
+let backgroundDefault = '#041925';
+let customPaletteDark = '#0F2C3A';
+let primaryMain = '#1E4459';
+
 // A custom theme for this app
 const theme = createTheme({
   palette: {
@@ -108,15 +112,10 @@ const theme = createTheme({
     MuiButtonBase: {
       styleOverrides: {
         root: { // Name of the rule
-          // overflow: 'visible', // Fix IE 11 issue
-          // '&:active': {
-          //   boxShadow: '0 0 10px 2px lime', // Add a green shadow on click
-          //   filter: 'brightness(105%)' // Increase brightness by 5%
-          // },
-          // '&:hover': {
-          //   boxShadow: '0 0 10px 2px lime', // Add a green shadow on hover
-          //   filter: 'brightness(105%)' // Increase brightness by 5%
-          // },
+          // turn off ripple
+          '& .MuiTouchRipple-root': {
+            display: 'none'
+          },
         }
       }
     },

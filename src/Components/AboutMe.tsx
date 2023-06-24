@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Grid, Typography, Container, Avatar } from '@mui/material';
+import { Box, Grid, Typography, Container, Avatar, Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import hexToRgbA from '../utils/hexToRgba';
 import { appBarHeight } from '../utils/appBarHeight';
+import StyledButton from './StyledButton';
 
 const AboutMe = () => {
   const theme = useTheme();
@@ -30,11 +31,13 @@ const AboutMe = () => {
         border: '1px solid ' + hexToRgbA(theme.palette.primary.main, 0.3),
         borderRadius: '10px',
         transition: 'border-color 0.15s ease-in-out, background-color 0.15s ease-in-out',
+        color: theme.palette.text.primary,
         '&:hover': {
           borderColor: hexToRgbA(theme.palette.background.default, 0.3),
           backgroundColor: hexToRgbA(theme.palette.customPalette.dark, 0.3),
           boxShadow: '0 0 10px 5px ' + hexToRgbA(theme.palette.primary.main, 0.3),
         },
+        justifyContent: "center",
       }
     )
   }
@@ -42,7 +45,6 @@ const AboutMe = () => {
   return (
     <Container maxWidth="lg" id="aboutme"
       sx={{
-        minHeight: `calc(80vh - ${appBarHeight}px)`
       }}
     >
       <Grid container spacing={2} mt={isMobile ? 8 : 16} alignItems={"center"}>
@@ -66,22 +68,53 @@ const AboutMe = () => {
             />
           </Grid>
         </Grid>
-        <Grid item xs={12} md={6} p={2}>
-          <Typography
-            variant="body1"
-            textAlign={"left"}
-            sx={BioBoxStyle()}
-          >
-            Hello, I'm a dedicated software engineer currently residing in Glasgow, Scotland. My experience spans both frontend and backend development, with an affinity for learning and applying diverse technologies and languages.
-          </Typography>
-          <Typography
+        <Grid container item xs={12} md={6} p={2}>
+          <Grid item xs={12}>
+            <Typography
+              variant="body1"
+              textAlign={"left"}
+              sx={BioBoxStyle()}
+            >
+              <div style={{ marginBottom: "1rem" }}>
+                Hello, I'm a dedicated software engineer currently residing in Glasgow, Scotland.
+              </div>
+              <div>
+                My experience spans both frontend and backend development, with an affinity for learning and applying diverse technologies and programming languages.
+              </div>
+            </Typography>
+          </Grid>
+          {/* <Typography
             variant="body1"
             textAlign={"left"}
             mt={2}
             sx={BioBoxStyle()}
           >
             My wife and I relocated from the United States to Scotland in 2020 for her to undertake her Doctor of Veterinary Medicine studies at the University of Glasgow. This move not only widened my cultural perspective but also enriched my professional journey. I've found that a remote work setting aligns best with my preference for flexibility and focus. Now, I'm actively on the lookout for new remote opportunities worldwide, ready to bring my skill set to new challenges.
-          </Typography>
+          </Typography> */}
+          <Grid item xs={12} mt={2}>
+            <StyledButton
+              id="contact-me-button"
+              sx={{
+                outline: '1px solid ' + hexToRgbA(theme.palette.primary.main, 0.3),
+                '&:hover': {
+                  outline: '1px solid ' + hexToRgbA(theme.palette.primary.main, .5),
+                  backgroundColor: hexToRgbA(theme.palette.customPalette.dark, 0.3),
+                  // boxShadow: '0 0 10px 5px ' + hexToRgbA(theme.palette.primary.main, 0.3),
+                }
+              }}
+              onClick={() => {
+                const contact = document.getElementById('contact');
+                if (!contact) return;
+                const contactPosition = contact.offsetTop;
+                const offsetPosition = contactPosition - appBarHeight;
+
+                window.scrollTo({
+                  top: offsetPosition,
+                  behavior: "smooth"
+                });
+              }}
+            >Contact Me</StyledButton>
+          </Grid>
         </Grid>
       </Grid>
     </Container>
