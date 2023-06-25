@@ -24,7 +24,7 @@ function ResponsiveAppBar(props: { currentSection: string }) {
 
   const checkScroll = () => {
     let currentScrollPos = window.scrollY;
-    
+
     const isShow = scrollPosition > currentScrollPos;
     setShowBar(isShow);
     setScrollPosition(currentScrollPos);
@@ -57,27 +57,24 @@ function ResponsiveAppBar(props: { currentSection: string }) {
       <List>
         {pages.map((page) => (
           <ListItem key={page}>
-            <StyledLink href={`#` + getPageId(page)} onClick={(event) => {
+            <StyledLink href={`#` + getPageId(page)} className='navLink' onClick={(event) => {
               event.preventDefault();
               console.log(event);
               // scroll to the section
               const targetElement = event.target as HTMLAnchorElement;
               // find the closest parent element with href attribute
-              let a = targetElement.parentElement?.parentElement?.getAttribute('href');
-              if (a) {
-                const target = document.querySelector<HTMLElement>(a);
-                if (target) {
-                  const targetPosition = target.offsetTop;
-                  const offsetPosition = targetPosition - 64;
-
-                  window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                  });
-                }
-              }
-              // close the drawer
+              let a = targetElement.parentElement?.parentElement?.getAttribute('href') ?? "";
+              let id = a.replace("#", "");
+              let doc = document.getElementById(id);
               setMobileOpen(false);
+              setTimeout(() => {
+                if (doc) {
+                  doc.scrollIntoView({ behavior: 'smooth' });
+                }
+              }, 0);
+              setTimeout(() => {
+                setShowBar(false);
+              }, 1000);
             }}>
               <ListItemText primary={page} sx={{ margin: "0" }} />
             </StyledLink>
@@ -121,20 +118,11 @@ function ResponsiveAppBar(props: { currentSection: string }) {
                   event.preventDefault();
                   // scroll to the section
                   const targetElement = event.target as HTMLAnchorElement;
-                  let a = targetElement.getAttribute('href');
-                  console.log(event);
-                  if (a) {
-                    const target = document.querySelector<HTMLElement>(a);
-                    if (target) {
-                      const targetPosition = target.offsetTop;
-                      const offsetPosition = targetPosition - 64;
-
-                      window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth"
-                      });
-                    }
-                  }
+                  const id = targetElement.id.split("_")[0];
+                  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+                  setTimeout(() => {
+                    setShowBar(false);
+                  }, 1000);
                 }}
               >
                 {page}
