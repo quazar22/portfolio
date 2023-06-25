@@ -2,14 +2,7 @@ import { Grid, Typography, Chip, Container } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { PropsWithChildren } from "react";
-
-const ExperienceChips = ({ children }: PropsWithChildren) => {
-  return (
-    <Grid item container direction="row" alignItems="center" justifyContent={"center"} rowGap={1} columnGap={1} mt={4}>
-      {children}
-    </Grid>
-  )
-}
+import { ChipMaker, ExperienceChips } from "../utils/ChipMaker";
 
 export const Tenzinc = () => {
   const theme = useTheme();
@@ -33,16 +26,7 @@ export const Tenzinc = () => {
               </>
             }
             <ExperienceChips>
-              <Chip label={".NET"} />
-              <Chip label={"C#"} />
-              <Chip label={"Firebase"} />
-              <Chip label={"HTML/CSS"} />
-              <Chip label={"Javascript"} />
-              <Chip label={"Material UI"} />
-              <Chip label={"PostgreSQL"} />
-              <Chip label={"Python"} />
-              <Chip label={"ReactJS"} />
-              <Chip label={"Typescript"} />
+              <ChipMaker chips={[".NET", "C#", "Firebase", "HTML/CSS", "Javascript", "Material UI", "PostgreSQL", "Python", "ReactJS", "Typescript"]} />
             </ExperienceChips>
           </Grid>
         </Grid>
@@ -78,18 +62,13 @@ export const NVTGroup = () => {
               </>
             }
             <ExperienceChips>
-              <Chip label={".NET"} />
-              <Chip label={"C#"} />
-              <Chip label={"HTML/CSS"} />
-              <Chip label={"Javascript"} />
-              <Chip label={"MSSQL"} />
-              <Chip label={"Python"} />
+              <ChipMaker chips={[".NET", "C#", "HTML/CSS", "Javascript", "MSSQL", "Python"]} />
             </ExperienceChips>
           </Grid>
         </Grid>
       </Grid>
       <Grid item xs={12} md={12}>
-        <Typography variant='body1' mt={2}>As the Lead Software Developer at NVT Group in Glasgow, UK, from November 2020 to December 2021, I played a pivotal role in Scotland's largest independent IT services provider. I utilized my skills as a full-stack developer using HTML, CSS, JavaScript, C#, Python, and MSSQL to deliver a nationally deployed risk and case management system designed to support the Justice sector.</Typography>
+        <Typography variant='body1' mt={2}>As a Software Developer at NVT Group in Glasgow, UK, from November 2020 to December 2021, I played a pivotal role in Scotland's largest independent IT services provider. I utilized my skills as a full-stack developer using HTML, CSS, JavaScript, C#, Python, and MSSQL to deliver a nationally deployed risk and case management system designed to support the Justice sector.</Typography>
         <Typography variant='body1' mt={2}>A key part of my role was managing complex data migrations into live systems, ensuring zero downtime for users, a task which required meticulous planning and execution. To guarantee that our application could meet the contracted performance requirements, I developed specialized load testing software.</Typography>
         <Typography variant='body1' mt={2}>After deployment, I promptly investigated and resolved any post-go live bugs reported by users, and made sure to provide them with timely feedback. Throughout my tenure, I used Azure Devops for version control, continuous integration/continuous delivery (CI/CD), and project management to ensure a smooth workflow and efficient delivery of services.</Typography>
       </Grid>
@@ -119,13 +98,7 @@ export const GreenthumbAutomation = () => {
               </>
             }
             <ExperienceChips>
-              <Chip label={"HTML/CSS"} />
-              <Chip label={"Java"} />
-              <Chip label={"Javascript"} />
-              <Chip label={"MySQL"} />
-              <Chip label={"PHP"} />
-              <Chip label={"Python"} />
-              <Chip label={"Swift"} />
+              <ChipMaker chips={["Android", "C#", "HTML/CSS", "Java", "Javascript", "MySQL", "PHP", "Python", "Swift"]} />
             </ExperienceChips>
           </Grid>
         </Grid>
@@ -161,12 +134,7 @@ export const TraxInternational = () => {
               </>
             }
             <ExperienceChips>
-              <Chip label={"C#"} />
-              <Chip label={"C++"} />
-              <Chip label={"HTML/CSS"} />
-              <Chip label={"Java"} />
-              <Chip label={"Python"} />
-              <Chip label={"Qt"} />
+              <ChipMaker chips={["C#", "C++", "HTML/CSS", "Java", "Python", "Qt"]} />
             </ExperienceChips>
           </Grid>
         </Grid>
@@ -203,11 +171,7 @@ export const Webmaster = () => {
               </>
             }
             <ExperienceChips>
-              <Chip label={"HTML/CSS"} />
-              <Chip label={"Java"} />
-              <Chip label={"Javascript"} />
-              <Chip label={"PHP"} />
-              <Chip label={"Python"} />
+              <ChipMaker chips={["HTML/CSS", "Java", "Javascript", "PHP", "Python"]} />
             </ExperienceChips>
           </Grid>
         </Grid>

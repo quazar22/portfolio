@@ -1,4 +1,4 @@
-export const pages = ['About Me', 'Experience', 'Education', 'Contact'];
+export const pages = ['About Me', 'Experience', 'Projects', 'Contact'];
 const createPageId = (page: string) => page.toLowerCase().replace(" ", "");
 export const pageIds = pages.map(page => createPageId(page));
 

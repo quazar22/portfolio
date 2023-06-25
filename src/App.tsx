@@ -6,7 +6,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import hexToRgbA from './utils/hexToRgba';
 import AboutMe from './Components/AboutMe';
 import Experience from './Components/Experience';
-import Education from './Components/Education';
+import Projects from './Components/Projects';
 import Contact from './Components/Contact';
 import { pageIds } from './pages';
 
@@ -19,7 +19,7 @@ function App() {
 
   const aboutRef = useRef<null | HTMLDivElement>(null);
   const experienceRef = useRef<null | HTMLDivElement>(null);
-  const educationRef = useRef<null | HTMLDivElement>(null);
+  const projectsRef = useRef<null | HTMLDivElement>(null);
   const contactRef = useRef<null | HTMLDivElement>(null);
   const [currentSection, setCurrentSection] = useState<string>("");
 
@@ -73,21 +73,21 @@ function App() {
 
     observer.observe(aboutRef.current as HTMLDivElement);
     observer.observe(experienceRef.current as HTMLDivElement);
-    observer.observe(educationRef.current as HTMLDivElement);
+    observer.observe(projectsRef.current as HTMLDivElement);
     observer.observe(contactRef.current as HTMLDivElement);
 
     // on first load, scroll to the top of the page and set the current section to the first section ("aboutme")
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
+    // window.scrollTo({
+    //   top: 0,
+    //   behavior: "smooth"
+    // });
     setCurrentSection(pageIds[0]);
     console.log("default current section: " + pageIds[0])
 
     return () => {
       observer.unobserve(aboutRef.current as HTMLDivElement);
       observer.unobserve(experienceRef.current as HTMLDivElement);
-      observer.unobserve(educationRef.current as HTMLDivElement);
+      observer.unobserve(projectsRef.current as HTMLDivElement);
       observer.unobserve(contactRef.current as HTMLDivElement);
 
       observer.disconnect();
@@ -126,10 +126,10 @@ function App() {
         }}
       >
         <ResponsiveAppBar currentSection={currentSection} />
-        <div ref={aboutRef} style={{marginBottom: isMobile ? "2rem" : "8rem"}}><AboutMe /></div>
-        <div ref={experienceRef}><Experience /></div>
-        <div ref={educationRef}><Education /></div>
-        <div ref={contactRef}><Contact /></div>
+        <div ref={aboutRef} style={{marginBottom: isMobile ? "4rem" : "8rem"}}><AboutMe /></div>
+        <div ref={experienceRef} style={{marginBottom: isMobile ? "4rem" : "8rem"}}><Experience /></div>
+        <div ref={projectsRef} style={{marginBottom: isMobile ? "0rem" : "4rem"}}><Projects /></div>
+        <div ref={contactRef} style={{marginBottom: isMobile ? "0rem" : "4rem"}}><Contact /></div>
       </Box>
     </>
   );

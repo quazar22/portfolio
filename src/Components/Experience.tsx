@@ -6,6 +6,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import heavyTypography from '../utils/heavyTypography';
 import * as Experiences from './JobExperiences';
 import hexToRgbA from '../utils/hexToRgba';
+import SectionTitle from './SectionTitle';
 
 
 interface TabPanelProps {
@@ -64,9 +65,10 @@ const Experience = () => {
       sx={{
       }}
     >
+      <SectionTitle title="Experience" />
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} onChange={handleChange} aria-label="tabs" variant={smallerThanLg ? 'scrollable' : 'standard'} allowScrollButtonsMobile sx={{  }} centered>
+          <Tabs value={value} onChange={handleChange} aria-label="tabs" variant={smallerThanLg ? 'scrollable' : 'standard'} allowScrollButtonsMobile sx={{}} centered>
             <Tab label={heavyTypography("Tenzinc Ltd")} {...a11yProps(0)} sx={{ textTransform: "none" }} />
             <Tab label={heavyTypography("NVT Group")} {...a11yProps(1)} sx={{ textTransform: "none" }} />
             <Tab label={heavyTypography("Greenthumb Automation")} {...a11yProps(2)} sx={{ textTransform: "none" }} />
@@ -91,15 +93,6 @@ const Experience = () => {
           <Experiences.Webmaster />
         </TabPanel>
       </Box>
-
-      {/* <Carousel
-        animation='slide'
-        autoPlay={false}
-      >
-        {
-          items.map((item, i) => <Item key={i}> {item} </Item>)
-        }
-      </Carousel> */}
 
     </Container>
   );
@@ -126,8 +119,6 @@ function Item({ children }: PropsWithChildren) {
         }}
       >
         {children}
-        {/* <h2>{props.item.name}</h2>
-      <p>{props.item.description}</p> */}
       </Box>
 
     </Box>
