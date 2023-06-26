@@ -27,6 +27,18 @@ const project_list = [
     ],
     deployed_link: "https://therandomsgenerator.com/",
     image: "/pics/randoms_site.jpg"
+  },
+  {
+    project_name: 'Load Testing Software',
+    project_description: 'This is a load testing software that I built for my company. It was made with python and uses the beautifulsoup4 and requests libraries. It is used to test the load of our servers and to make sure that they are able to handle the load that we were contracted to handle.',
+    image: "/pics/load_testing.jpg",
+    experience_chips: [
+      "Python",
+      "BeautifulSoup4",
+      "Python Requests"
+    ],
+    github_link_text: "Check out my load testing software code on GitHub",
+    github_link: "https://github.com/quazar22/OldLoadTestingJustice",
   }
 ]
 
