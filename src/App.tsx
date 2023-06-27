@@ -128,9 +128,35 @@ function App() {
         <ResponsiveAppBar currentSection={currentSection} />
         <div ref={aboutRef} style={{ marginBottom: isMobile ? "4rem" : "8rem" }}><AboutMe /></div>
         <div ref={experienceRef} style={{ marginBottom: isMobile ? "4rem" : "8rem" }}><Experience /></div>
-        <div ref={projectsRef} style={{ marginBottom: isMobile ? "4rem" : "4rem" }}><Projects /></div>
-        <FinalDivider />
+        <div ref={projectsRef} style={{ marginBottom: isMobile ? "4rem" : "8rem" }}><Projects /></div>
         <div ref={contactRef} style={{ marginBottom: isMobile ? "4rem" : "4rem" }}><Contact /></div>
+        <FinalDivider />
+        <div style={{ marginBottom: isMobile ? "4rem" : "4rem" }}>
+          <Container maxWidth="lg">
+            <Grid container justifyContent="center" alignItems="center" spacing={4}>
+              <Grid item xs={12} md={6}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: 2,
+                  }}
+                >
+                  <Typography
+                    variant="body2"
+                    align="center"
+                    sx={{
+                      color: theme.palette.additionalText.dark
+                    }}>
+                    Created by Geoffrey Knox using React, TypeScript, and Material UI.
+                  </Typography>
+                </Box>
+              </Grid>
+            </Grid>
+          </Container>
+        </div>
       </Box>
     </>
   );

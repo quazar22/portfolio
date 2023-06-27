@@ -36,6 +36,12 @@ const theme = createTheme({
       light: '#3A6B7C',
       dark: '#0F2C3A',
     },
+    additionalText: {
+      main: '#6BBFEF',
+      light: '#9FE3FF',
+      dark: hexToRgbA('#6BBFEF', 0.5),
+    },
+
   },
   components: {
     MuiCssBaseline: {
@@ -156,6 +162,18 @@ const theme = createTheme({
           '& .MuiTouchRipple-root': {
             display: 'none'
           },
+        }
+      }
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          // '&:hover': {
+          //   // Increase brightness by 5% and add shadow on hover
+          //   border: "none",
+          //   boxShadow: 'none',
+          //   borderColor: "transparent",
+          // }
         }
       }
     },
