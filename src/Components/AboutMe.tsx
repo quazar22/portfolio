@@ -69,18 +69,19 @@ const AboutMe = () => {
           </Grid>
         </Grid>
         <Grid container item xs={12} md={6} p={2}>
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={BioBoxStyle()}>
             <Typography
               variant="body1"
               textAlign={"left"}
-              sx={BioBoxStyle()}
+              mb={2}
             >
-              <div style={{ marginBottom: "1rem" }}>
-                Hello, I'm a dedicated software engineer currently residing in Glasgow, Scotland.
-              </div>
-              <div>
-                My experience spans both frontend and backend development, with an affinity for learning and applying diverse technologies and programming languages.
-              </div>
+              Hello, I'm a dedicated software engineer currently residing in Glasgow, Scotland.
+            </Typography>
+            <Typography
+              variant="body1"
+              textAlign={"left"}
+            >
+              My experience spans both frontend and backend development, with an affinity for learning and applying diverse technologies and programming languages.
             </Typography>
           </Grid>
           {/* <Typography

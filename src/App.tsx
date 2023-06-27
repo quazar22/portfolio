@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import ResponsiveAppBar from './Components/ResponsiveAppBar';
-import { Box, Grid, Typography, Container, Avatar } from '@mui/material';
+import { Box, Grid, Typography, Container, Avatar, Divider } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import hexToRgbA from './utils/hexToRgba';
@@ -61,10 +61,10 @@ function App() {
         entries.forEach((entry) => {
           let id = entry.target.children[0].id;
           if (entry.isIntersecting) {
-            console.log(`Element with id '${id}' is now inside the viewport`);
+            // console.log(`Element with id '${id}' is now inside the viewport`);
             setCurrentSection(id);
           } else {
-            console.log(`Element with id '${id}' is now outside the viewport`);
+            // console.log(`Element with id '${id}' is now outside the viewport`);
           }
         });
       },
@@ -82,7 +82,7 @@ function App() {
     //   behavior: "smooth"
     // });
     setCurrentSection(pageIds[0]);
-    console.log("default current section: " + pageIds[0])
+    // console.log("default current section: " + pageIds[0])
 
     return () => {
       observer.unobserve(aboutRef.current as HTMLDivElement);
@@ -126,24 +126,23 @@ function App() {
         }}
       >
         <ResponsiveAppBar currentSection={currentSection} />
-        <div ref={aboutRef} style={{marginBottom: isMobile ? "4rem" : "8rem"}}><AboutMe /></div>
-        <div ref={experienceRef} style={{marginBottom: isMobile ? "4rem" : "8rem"}}><Experience /></div>
-        <div ref={projectsRef} style={{marginBottom: isMobile ? "4rem" : "4rem"}}><Projects /></div>
-        <div ref={contactRef} style={{marginBottom: isMobile ? "0rem" : "4rem"}}><Contact /></div>
+        <div ref={aboutRef} style={{ marginBottom: isMobile ? "4rem" : "8rem" }}><AboutMe /></div>
+        <div ref={experienceRef} style={{ marginBottom: isMobile ? "4rem" : "8rem" }}><Experience /></div>
+        <div ref={projectsRef} style={{ marginBottom: isMobile ? "4rem" : "4rem" }}><Projects /></div>
+        <FinalDivider />
+        <div ref={contactRef} style={{ marginBottom: isMobile ? "4rem" : "4rem" }}><Contact /></div>
       </Box>
     </>
   );
 }
 
-const Filler = () => {
+const FinalDivider = () => {
+  const theme = useTheme();
+  let isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   return (
-    <div>
-      <Typography>
-        Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Sed Do Eiusmod Tempor Incididunt Ut Labore Et Dolore Magna Aliqua Ut Enim Ad Minim Veniam Quis Nostrud Exercitation Ullamco Laboris Nisi Ut Aliquip Ex Ea Commodo Consequat Duis Aute Irure Dolor In Reprehenderit In Voluptate Velit Esse Cillum Dolore Eu Fugiat Nulla Pariatur Excepteur Sint Occaecat Cupidatat Non Proident Sunt In Culpa Qui Officia Deserunt Mollit Anim Id Est Laborum
-        Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Sed Do Eiusmod Tempor Incididunt Ut Labore Et Dolore Magna Aliqua Ut Enim Ad Minim Veniam Quis Nostrud Exercitation Ullamco Laboris Nisi Ut Aliquip Ex Ea Commodo Consequat Duis Aute Irure Dolor In Reprehenderit In Voluptate Velit Esse Cillum Dolore Eu Fugiat Nulla Pariatur Excepteur Sint Occaecat Cupidatat Non Proident Sunt In Culpa Qui Officia Deserunt Mollit Anim Id Est Laborum
-        Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Sed Do Eiusmod Tempor Incididunt Ut Labore Et Dolore Magna Aliqua Ut Enim Ad Minim Veniam Quis Nostrud Exercitation Ullamco Laboris Nisi Ut Aliquip Ex Ea Commodo Consequat Duis Aute Irure Dolor In Reprehenderit In Voluptate Velit Esse Cillum Dolore Eu Fugiat Nulla Pariatur Excepteur Sint Occaecat Cupidatat Non Proident Sunt In Culpa Qui Officia Deserunt Mollit Anim Id Est Laborum
-      </Typography>
-    </div>
+    <Container maxWidth="lg">
+      <Divider style={{ marginBottom: isMobile ? "4rem" : "4rem", backgroundColor: hexToRgbA(theme.palette.primary.main, 0.1) }} />
+    </Container>
   )
 }
 

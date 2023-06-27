@@ -76,6 +76,25 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           color: brandColor,
+          "&:hover": {
+            border: "none",
+            boxShadow: "none",
+            backgroundColor: "transparent",
+          }
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          color: brandColor,
+          "&:hover": {
+            border: "none",
+            boxShadow: "none",
+            backgroundColor: "transparent",
+            // raise brightness by 5%
+            filter: "brightness(135%)",
+          }
         },
       },
     },
@@ -116,7 +135,7 @@ const theme = createTheme({
           '& .MuiTouchRipple-root': {
             display: 'none'
           },
-        }
+        },
       }
     },
     MuiTab: {
