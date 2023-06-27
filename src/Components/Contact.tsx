@@ -11,10 +11,68 @@ import IconButton from '@mui/material/IconButton';
 
 const Contact = () => {
   let isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const maxMessageLength = 1000;
+  const maxSubjectLength = 50;
+  const maxNameEmailLength = 50;
 
   const nameEmailRef = React.useRef<HTMLInputElement>(null);
   const subjectRef = React.useRef<HTMLInputElement>(null);
   const messageRef = React.useRef<HTMLInputElement>(null);
+
+  const [nameEmailState, setNameEmailState] = React.useState<string>("");
+  const [subjectState, setSubjectState] = React.useState<string>("");
+  const [messageState, setMessageState] = React.useState<string>("");
+
+  const [nameEmailErrorState, setNameEmailErrorState] = React.useState<boolean>(false);
+  const [subjectErrorState, setSubjectErrorState] = React.useState<boolean>(false);
+  const [messageErrorState, setMessageErrorState] = React.useState<boolean>(false);
+
+  const onNameEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNameEmailState(event.target.value);
+    if(event.target.value.length !== 0) {
+      setNameEmailErrorState(false);
+    } else {
+      setNameEmailErrorState(true);
+    }
+  }
+
+  const onSubjectChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSubjectState(event.target.value);
+  }
+
+  const onMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMessageState(event.target.value);
+    if(event.target.value.length !== 0) {
+      setMessageErrorState(false);
+    } else {
+      setMessageErrorState(true);
+    }
+  }
+
+  const onSendClick = () => {
+    let nameEmail = nameEmailState;
+    let subject = subjectState;
+    let message = messageState;
+
+    // if any of the fields are empty, default to the ref values. If the ref values are empty, set the mui textfield error state to true
+    if (nameEmail === "") {
+      if (nameEmailRef.current?.value && nameEmailRef.current.value.length !== 0) {
+        nameEmail = nameEmailRef.current.value;
+      }
+      else {
+        setNameEmailErrorState(true);
+      }
+    }
+    if (message === "") {
+      if (messageRef.current?.value && messageRef.current.value.length !== 0) {
+        message = messageRef.current.value;
+      }
+      else {
+        setMessageErrorState(true);
+      }
+    }
+  }
+
   return (
     <Container maxWidth="lg" id="contact"
       sx={{
@@ -85,46 +143,58 @@ const Contact = () => {
           >
             <Grid container spacing={2} justifyContent={"center"}>
               <Grid item xs={12} md={6}>
+                {/* I am repeating code here since I do not want to deal with forwardRefs. Sue me. */}
                 <TextField
                   variant='outlined'
-                  label='Name/Email'
+                  label={`Name/Email (${nameEmailState.length}/${maxNameEmailLength})`}
                   fullWidth
                   inputMode='text'
                   autoComplete='off'
                   type='text'
-                  ref={nameEmailRef}
+                  required
+                  error={nameEmailErrorState}
                   sx={TextAreaStyles}
+                  inputProps={{ maxLength: maxNameEmailLength, ref: nameEmailRef }}
+                  onChange={onNameEmailChange}
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <TextField
                   variant='outlined'
-                  label='Subject'
+                  label={`Subject (${subjectState.length}/${maxSubjectLength})`}
                   fullWidth
                   inputMode='text'
                   autoComplete='off'
                   type='text'
-                  ref={subjectRef}
+                  error={subjectErrorState}
                   sx={TextAreaStyles}
+                  inputProps={{ maxLength: maxSubjectLength, ref: subjectRef }}
+                  onChange={onSubjectChange}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   variant='outlined'
-                  label='Message'
+                  label={`Message (${messageState.length}/${maxMessageLength})`}
                   fullWidth
                   inputMode='text'
                   autoComplete='off'
                   type='text'
+                  required
+                  error={messageErrorState}
                   multiline
                   rows={isMobile ? 4 : 8}
-                  ref={messageRef}
                   sx={TextAreaStyles}
+                  inputProps={{ maxLength: maxMessageLength, ref: messageRef }}
+                  onChange={onMessageChange}
                 />
               </Grid>
               <Grid item container xs={12} justifyContent={"center"}>
                 <Button
                   variant="outlined"
+                  onClick={() => {
+                    onSendClick();
+                  }}
                   sx={{
                     textTransform: 'none',
                     '&:hover': {
