@@ -8,6 +8,7 @@ import AboutMe from './Components/AboutMe';
 import Experience from './Components/Experience';
 import Projects from './Components/Projects';
 import Contact from './Components/Contact';
+import Footer from './Components/Footer';
 import { pageIds } from './pages';
 
 function App() {
@@ -131,32 +132,7 @@ function App() {
         <div ref={projectsRef} style={{ marginBottom: isMobile ? "4rem" : "8rem" }}><Projects /></div>
         <div ref={contactRef} style={{ marginBottom: isMobile ? "4rem" : "4rem" }}><Contact /></div>
         <FinalDivider />
-        <div style={{ marginBottom: isMobile ? "4rem" : "4rem" }}>
-          <Container maxWidth="lg">
-            <Grid container justifyContent="center" alignItems="center" spacing={4}>
-              <Grid item xs={12} md={6}>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    gap: 2,
-                  }}
-                >
-                  <Typography
-                    variant="body2"
-                    align="center"
-                    sx={{
-                      color: theme.palette.additionalText.dark
-                    }}>
-                    Created by Geoffrey Knox using React, TypeScript, and Material UI.
-                  </Typography>
-                </Box>
-              </Grid>
-            </Grid>
-          </Container>
-        </div>
+        <div style={{ marginBottom: isMobile ? "4rem" : "4rem" }}><Footer /></div>
       </Box>
     </>
   );
@@ -171,5 +147,7 @@ const FinalDivider = () => {
     </Container>
   )
 }
+
+
 
 export default App;
