@@ -27,9 +27,12 @@ const Contact = () => {
   const [subjectErrorState, setSubjectErrorState] = React.useState<boolean>(false);
   const [messageErrorState, setMessageErrorState] = React.useState<boolean>(false);
 
+  const [messageSentStatusText, setMessageSentStatusText] = React.useState<string>("");
+  const [messageSentIsError, setMessageSentIsError] = React.useState<boolean>(false);
+
   const onNameEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNameEmailState(event.target.value);
-    if(event.target.value.length !== 0) {
+    if (event.target.value.length !== 0) {
       setNameEmailErrorState(false);
     } else {
       setNameEmailErrorState(true);
@@ -42,7 +45,7 @@ const Contact = () => {
 
   const onMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMessageState(event.target.value);
-    if(event.target.value.length !== 0) {
+    if (event.target.value.length !== 0) {
       setMessageErrorState(false);
     } else {
       setMessageErrorState(true);
@@ -70,6 +73,38 @@ const Contact = () => {
       else {
         setMessageErrorState(true);
       }
+    }
+    // send post request to backend
+    if (nameEmail !== "" && message !== "") {
+      fetch('https://contact.therandomsgenerator.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          nameEmail: nameEmail,
+          subject: subject,
+          message: message
+        })
+      }).then((response) => {
+        if (response.ok) {
+          // clear the text fields
+          setNameEmailState("");
+          setSubjectState("");
+          setMessageState("");
+          // clear the ref values
+          if (nameEmailRef.current) nameEmailRef.current.value = "";
+          if (subjectRef.current) subjectRef.current.value = "";
+          if (messageRef.current) messageRef.current.value = "";
+          // set the message sent status text
+          setMessageSentStatusText("Message sent successfully!");
+          setMessageSentIsError(false);
+        }
+      }).catch((error) => {
+        console.log(error);
+        setMessageSentStatusText("Error sending message. Please try again later.");
+        setMessageSentIsError(true);
+      });
     }
   }
 
@@ -205,6 +240,16 @@ const Contact = () => {
                 >
                   Send
                 </Button>
+              </Grid>
+              <Grid item container xs={12} justifyContent={"center"}>
+                <Typography
+                  variant="body2"
+                  align="center"
+                  sx={{
+                    color: messageSentIsError ? theme.palette.error.main : theme.palette.success.main
+                  }}>
+                  {messageSentStatusText}
+                </Typography>
               </Grid>
             </Grid>
           </Box>
