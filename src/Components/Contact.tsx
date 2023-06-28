@@ -82,7 +82,7 @@ const Contact = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          nameEmail: nameEmail,
+          name_email: nameEmail,
           subject: subject,
           message: message
         })
@@ -99,6 +99,10 @@ const Contact = () => {
           // set the message sent status text
           setMessageSentStatusText("Message sent successfully!");
           setMessageSentIsError(false);
+        } else {
+          console.log(response);
+          setMessageSentStatusText("Error sending message. Please try again later.");
+          setMessageSentIsError(true);
         }
       }).catch((error) => {
         console.log(error);
