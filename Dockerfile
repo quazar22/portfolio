@@ -9,7 +9,7 @@ RUN npm install
 RUN npm install react-scripts -g
 RUN npm install serve -g
 
-ENV PORT=
+ENV PORT=3030
 
 COPY . ./
 RUN yarn build
