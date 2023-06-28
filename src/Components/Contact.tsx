@@ -76,7 +76,7 @@ const Contact = () => {
     }
     // send post request to backend
     if (nameEmail !== "" && message !== "") {
-      fetch('https://contact.therandomsgenerator.com', {
+      fetch('https://contact.therandomsgenerator.com/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
