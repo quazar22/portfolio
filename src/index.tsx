@@ -16,6 +16,10 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
+// create async initial request to store ip address in external database
+fetch('https://api.therandomsgenerator.com/logger/access', { method: 'POST' }).catch(err => {});
+// fetch('http://127.0.0.1:3010/logger/access', { method: 'POST' }).catch(err => {});
+
 root.render(
 
   <ThemeProvider theme={theme}>
@@ -26,7 +30,7 @@ root.render(
           <Route path="/" element={<App />} />
         </Routes>
       </Router>
-  </StyledThemeProvider>
+    </StyledThemeProvider>
   </ThemeProvider >
 );
 
