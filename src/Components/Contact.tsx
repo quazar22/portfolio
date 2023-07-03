@@ -149,7 +149,7 @@ const Contact = () => {
               </IconButtonStyled>
               <IconButtonStyled
                 // open up my linkedin page in a new tab
-                onClickCallback={() => window.open("https://www.linkedin.com/in/geoffrey-knox-984901194/", "_blank")}
+                onClickCallback={() => window.open("https://www.linkedin.com/in/geoffrey-knox/", "_blank")}
               >
                 <LinkedInIcon fontSize='large' />
               </IconButtonStyled>
