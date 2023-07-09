@@ -17,8 +17,9 @@ const root = ReactDOM.createRoot(
 );
 
 // create async initial request to store ip address in external database
-fetch('https://api.therandomsgenerator.com/logger/access', { method: 'POST' }).catch(err => {});
-// fetch('http://127.0.0.1:3010/logger/access', { method: 'POST' }).catch(err => {});
+if (process.env.NODE_ENV === 'production') {
+  fetch('https://api.therandomsgenerator.com/logger/access', { method: 'POST' }).catch(err => {});
+}
 
 root.render(
 

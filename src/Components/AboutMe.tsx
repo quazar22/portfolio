@@ -75,13 +75,20 @@ const AboutMe = () => {
               textAlign={"left"}
               mb={2}
             >
-              Hello, I'm a dedicated software engineer currently residing in Glasgow, Scotland.
+              Hello, I'm a software engineer currently residing in Glasgow, Scotland.
+            </Typography>
+            <Typography
+              variant="body1"
+              textAlign={"left"}
+              mb={2}
+            >
+              My experience spans both frontend and backend development, with an affinity for learning and applying diverse technologies and programming languages.
             </Typography>
             <Typography
               variant="body1"
               textAlign={"left"}
             >
-              My experience spans both frontend and backend development, with an affinity for learning and applying diverse technologies and programming languages.
+              When I'm not working, I enjoy spending time with my wife and our two dogs, playing video games, exploring the beautiful Scottish countryside, and working on personal projects to further my skills.
             </Typography>
           </Grid>
           {/* <Typography
@@ -114,7 +121,9 @@ const AboutMe = () => {
                   behavior: "smooth"
                 });
               }}
-            >Contact Me</StyledButton>
+            >
+              Contact Me
+            </StyledButton>
           </Grid>
         </Grid>
       </Grid>
