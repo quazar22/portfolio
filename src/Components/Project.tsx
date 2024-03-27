@@ -1,20 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Typography, Grid, Box, Chip, Link } from '@mui/material';
 import { ChipMaker, ExperienceChips } from '../utils/ChipMaker';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import WebIcon from '@mui/icons-material/Web';
 import theme from '../theme';
 import hexToRgbA from '../utils/hexToRgba';
+import { ProjectType } from '../Models/Project';
+import { ImageData, ImageType } from '../Models/Image';
 
 const Project = (props: {
-  project_name?: string | undefined,
-  project_description?: string | undefined,
-  experience_chips?: string[] | undefined,
-  github_link?: string | undefined,
-  github_link_text?: string | undefined,
-  deployed_link?: string | undefined
-  image?: string | undefined
+  project: ProjectType
 }) => {
+  const image_link_base = process.env.REACT_APP_API_URL + '/api/files';
+  const [imageLinks, setImageLinks] = useState([] as string[]);
+
+  useEffect(() => {
+    const getImageLinks = async () => {
+      const api_endpoint = process.env.REACT_APP_API_URL + '/projects/pid/' + props.project.id + '/images';
+      const response = await fetch(api_endpoint);
+      const data = await response.json();
+      let image_links: string[] = [] as string[];
+      if (!data.data || data.data.length === 0) {
+        return;
+      }
+      let image_data = data.data as ImageData;
+      for (let image of image_data.images) {
+        let image_url = image_data.endpoint + `/api/files/${image.collectionId}/${image.id}/${image.image}`;
+        image_links.push(image_url);
+      }
+      setImageLinks(image_links);
+      console.log(data);
+    }
+    getImageLinks();
+  }, []);
+
   return (
     <Grid container p={2}
       alignItems={"start"}
@@ -32,14 +51,16 @@ const Project = (props: {
     >
       <Grid item container xs={12}
         sx={{
-          
+
         }}
       >
         <Grid item xs={12}>
-          <Typography variant="h5" textAlign={"center"}>{props.project_name}</Typography>
+          <Typography variant="h5" textAlign={"center"}>{props.project.title}</Typography>
         </Grid>
         <Grid item container xs={12} alignItems="center" justifyContent="center">
           <Grid item xs={12}>
+            {
+            imageLinks.length > 0 &&
             <Box sx={{
               height: "100%",
               width: "100%",
@@ -49,7 +70,7 @@ const Project = (props: {
               justifyContent: 'center'
             }}>
               <img
-                src={props.image}
+                src={imageLinks[0]}
                 style={{
                   borderRadius: 4,
                   border: '1px solid ' + hexToRgbA(theme.palette.primary.main, 0.2),
@@ -58,37 +79,32 @@ const Project = (props: {
                   objectFit: 'contain'
                 }}
               />
-            </Box>
+            </Box>}
           </Grid>
         </Grid>
         <Grid item xs={12} mb={2}>
-          <Typography variant="body2" textAlign={"left"}>{props.project_description}</Typography>
+          <Typography variant="body2" textAlign={"left"}>{props.project.description}</Typography>
         </Grid>
         {
-          props.github_link &&
-          <Grid item container xs={12} alignItems="center">
-            <Grid item>
-              <Link href={props.github_link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: theme.palette.primary.main, display: 'flex', alignItems: 'center' }}>
-                <GitHubIcon />
-                <Typography variant="body2" component="span" textAlign={"left"} ml={1}>{props.github_link_text ? `${props.github_link_text}` : `Check out ${props.project_name} on Github`}</Typography>
-              </Link>
-            </Grid>
-          </Grid>
-        }
-        {
-          props.deployed_link &&
-          <Grid item container xs={12} alignItems="center">
-            <Grid item>
-              <Link href={props.deployed_link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: theme.palette.primary.main, display: 'flex', alignItems: 'center' }}>
-                <WebIcon />
-                <Typography variant="body2" component="span" textAlign={"left"} ml={1}>Check out a deployed version of {props.project_name}</Typography>
-              </Link>
-            </Grid>
-          </Grid>
+          props.project.links &&
+          props.project.links.map((link, i) => {
+            return (
+              <Grid item container xs={12} alignItems="center" key={i}>
+                <Grid item>
+                  <Link href={link.url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: theme.palette.primary.main, display: 'flex', alignItems: 'center' }}>
+                    {link.is_github ? <GitHubIcon /> : <WebIcon />}
+                    <Typography variant="body2" component="span" textAlign={"left"} ml={1}>
+                      {link.is_github ? `Check out ${link.title} on Github` : `Check out a deployed version of ${link.title}`}
+                    </Typography>
+                  </Link>
+                </Grid>
+              </Grid>
+            )
+          })
         }
         <Grid item container xs={12} justifyContent={"center"}>
           <ExperienceChips>
-            <ChipMaker chips={props.experience_chips} />
+            <ChipMaker chips={props.project.experience_chips} />
           </ExperienceChips>
         </Grid>
       </Grid>

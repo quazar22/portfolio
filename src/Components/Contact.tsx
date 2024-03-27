@@ -8,6 +8,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
 import IconButton from '@mui/material/IconButton';
+import { getApiUrl } from '../utils/url';
 
 const Contact = () => {
   let isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -76,7 +77,8 @@ const Contact = () => {
     }
     // send post request to backend
     if (nameEmail !== "" && message !== "") {
-      fetch('https://contact.therandomsgenerator.com/contact', {
+      const api_endpoint = getApiUrl() + '/contact';
+      fetch(api_endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
