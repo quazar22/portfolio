@@ -11,6 +11,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
 import AnimatedBackground from './Components/AnimatedBackground';
 import FloatingSquare from './Components/FloatingSquare';
+import Blog from './Components/Blog';
+import MoreProjects from './Components/MoreProjects';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -29,6 +31,8 @@ root.render(
       <Router>
         <Routes>
           <Route path="/" element={<App />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/projects" element={<MoreProjects />} />
         </Routes>
       </Router>
     </StyledThemeProvider>

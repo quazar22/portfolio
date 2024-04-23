@@ -86,10 +86,10 @@ function App() {
     // console.log("default current section: " + pageIds[0])
 
     return () => {
-      observer.unobserve(aboutRef.current as HTMLDivElement);
-      observer.unobserve(experienceRef.current as HTMLDivElement);
-      observer.unobserve(projectsRef.current as HTMLDivElement);
-      observer.unobserve(contactRef.current as HTMLDivElement);
+      // observer.unobserve(aboutRef.current as HTMLDivElement);
+      // observer.unobserve(experienceRef.current as HTMLDivElement);
+      // observer.unobserve(projectsRef.current as HTMLDivElement);
+      // observer.unobserve(contactRef.current as HTMLDivElement);
 
       observer.disconnect();
     };

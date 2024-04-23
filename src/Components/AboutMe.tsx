@@ -5,9 +5,11 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import hexToRgbA from '../utils/hexToRgba';
 import { appBarHeight } from '../utils/appBarHeight';
 import StyledButton from './StyledButton';
+import { useNavigate } from 'react-router-dom';
 
 const AboutMe = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [myName, setMyName] = useState('Geoffrey Knox');
@@ -123,6 +125,22 @@ const AboutMe = () => {
               }}
             >
               Contact Me
+            </StyledButton>
+            <StyledButton
+              id="contact-me-button"
+              sx={{
+                outline: '1px solid ' + hexToRgbA(theme.palette.primary.main, 0.3),
+                '&:hover': {
+                  outline: '1px solid ' + hexToRgbA(theme.palette.primary.main, .5),
+                  backgroundColor: hexToRgbA(theme.palette.customPalette.dark, 0.3),
+                  // boxShadow: '0 0 10px 5px ' + hexToRgbA(theme.palette.primary.main, 0.3),
+                }
+              }}
+              onClick={() => {
+                navigate('/blog');
+              }}
+            >
+              My Blog
             </StyledButton>
           </Grid>
         </Grid>

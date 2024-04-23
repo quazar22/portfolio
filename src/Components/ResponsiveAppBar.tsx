@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from "react-router-dom";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Drawer from '@mui/material/Drawer';
@@ -19,6 +20,7 @@ import { pages } from '../pages';
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar(props: { currentSection: string }) {
+  const navigate = useNavigate();
   const [showBar, setShowBar] = useState(true);
   const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -56,8 +58,8 @@ function ResponsiveAppBar(props: { currentSection: string }) {
       <Toolbar />
       <List>
         {pages.map((page) => (
-          <ListItem key={page}>
-            <StyledLink href={`#` + getPageId(page)} className='navLink' onClick={(event) => {
+          <ListItem key={page.title}>
+            <StyledLink href={`#` + getPageId(page.title)} className='navLink' onClick={(event) => {
               event.preventDefault();
               console.log(event);
               // scroll to the section
@@ -76,7 +78,7 @@ function ResponsiveAppBar(props: { currentSection: string }) {
                 setShowBar(false);
               }, 1000);
             }}>
-              <ListItemText primary={page} sx={{ margin: "0" }} />
+              <ListItemText primary={page.title} sx={{ margin: "0" }} />
             </StyledLink>
           </ListItem>
         ))}
@@ -113,19 +115,22 @@ function ResponsiveAppBar(props: { currentSection: string }) {
             </>
           ) : (
             pages.map((page) => (
-              <StyledLink key={page} id={getPageId(page) + "_link"} href={`#` + getPageId(page)} sx={{ ml: 2 }} variant='h5' fontWeight={"bold"}
+              <StyledLink key={page.title} id={getPageId(page.title) + "_link"} href={`#` + getPageId(page.title)} sx={{ ml: 2 }} variant='h5' fontWeight={"bold"}
                 onClick={(event) => {
                   event.preventDefault();
                   // scroll to the section
                   const targetElement = event.target as HTMLAnchorElement;
                   const id = targetElement.id.split("_")[0];
+                  if (page.redirect) {
+                    navigate(page.redirect);
+                  }
                   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
                   setTimeout(() => {
                     setShowBar(false);
                   }, 1000);
                 }}
               >
-                {page}
+                {page.title}
               </StyledLink>
             ))
           )}

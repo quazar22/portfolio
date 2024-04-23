@@ -7,6 +7,9 @@ import project_list from '../resources/projects';
 import { getApiUrl } from '../utils/url';
 import { ProjectType } from '../Models/Project';
 import Project from './Project';
+import StyledButton from './StyledButton';
+import hexToRgbA from '../utils/hexToRgba';
+import { useNavigate } from 'react-router-dom';
 
 const ProjectWrapper = (props: { project: any }) => {
   return (
@@ -20,6 +23,7 @@ const ProjectWrapper = (props: { project: any }) => {
 
 const Projects = () => {
   let theme = useTheme();
+  const navigate = useNavigate();
   const [projects, setProjects] = useState([] as ProjectType[]);
 
   useEffect(() => {
@@ -71,6 +75,23 @@ const Projects = () => {
       {/* <Typography variant="h6" align="center" sx={{ mt: 4 }}>
         More projects to be added soon!
       </Typography> */}
+      <Grid container justifyContent="center" sx={{ mt: 4 }}>
+        <StyledButton
+          sx={{
+            outline: '1px solid ' + hexToRgbA(theme.palette.primary.main, 0.3),
+            '&:hover': {
+              outline: '1px solid ' + hexToRgbA(theme.palette.primary.main, .5),
+              backgroundColor: hexToRgbA(theme.palette.customPalette.dark, 0.3),
+              // boxShadow: '0 0 10px 5px ' + hexToRgbA(theme.palette.primary.main, 0.3),
+            }
+          }}
+          onClick={() => {
+            navigate('/projects');
+          }}
+        >
+          See More Projects
+        </StyledButton>
+      </Grid>
     </Container>
   );
 }
