@@ -2,13 +2,16 @@ import React, { useEffect, useState, useRef } from 'react';
 import { getApiUrl } from '../utils/url';
 import { ProjectType } from '../Models/Project';
 
-import { Container, Typography, Pagination, Grid, TextField, Box, useMediaQuery, Button } from '@mui/material';
+import { Container, Typography, Pagination, Grid, TextField, Box, useMediaQuery, Button, IconButton } from '@mui/material';
 import hexToRgbA from '../utils/hexToRgba';
 import theme from '../theme';
 import StyledButton from './StyledButton';
 import { FileUploader } from 'react-drag-drop-files-variable-upload-label';
 
+
 import { ChipMaker, ExperienceChips } from '../utils/ChipMaker';
+
+import ClearIcon from '@mui/icons-material/Clear';
 
 const TextAreaStyles = {
     "& .MuiOutlinedInput-notchedOutline": {
@@ -41,6 +44,9 @@ const ProjectAdmin = () => {
     const [chips, setChips] = React.useState([] as string[]);
 
     const chipRef = useRef<HTMLInputElement>(null);
+
+    const [files, setFiles] = useState([] as File[]);
+    const [errorDialog, setErrorDialog] = useState("");
 
     const onExperienceChipChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setExperienceChipInput(event.target.value);
@@ -75,6 +81,16 @@ const ProjectAdmin = () => {
         }
         getProjects();
     }, []);
+
+    const handleFileUpload = (x: any) => {
+        let fileObj = x;
+        if (fileObj.size < 0 || fileObj.size > 10000000) {
+            setErrorDialog("File must be between 0 and 10mb.");
+        } else {
+            setErrorDialog("");
+            setFiles([...files, ...fileObj]);
+        }
+    }
 
     return (
         <Container>
@@ -205,15 +221,35 @@ const ProjectAdmin = () => {
                             </Grid>
                             <Grid item xs={8}>
                                 <FileUploader
-                                    // handleChange={handleFileUpload}
+                                    handleChange={handleFileUpload}
                                     multiple={true}
-                                    maxSize={10000000}
-                                    minSize={1}
+                                    maxSize={10_000_000}
+                                    minSize={0}
                                     // onSizeError={handleWrongSizeFile}
                                     required={true}
                                     label={"Add an image by dragging and dropping or clicking here."}
                                     hoverTitle={"Drop the file here"}
+                                    types={["png", "jpg", "jpeg", "gif"]}
+                                    single={true}
                                 />
+                            </Grid>
+                            <Grid item xs={12} mt={4}>
+                                {files.length > 0 ? files.map(file => (
+                                    <Box display="flex" alignItems="center"
+                                        sx={{
+                                            borderRadius: '10px',
+                                            backgroundColor: hexToRgbA(theme.palette.background.paper, 0.1),
+                                            outline: hexToRgbA(theme.palette.primary.main, 0.35) + ' solid 1px'
+                                        }}
+                                        mt={1}
+                                    >
+                                        <IconButton onClick={() => { setFiles(files.filter(f => f !== file)) }}>
+                                            <ClearIcon />
+                                        </IconButton>
+                                        <Typography variant='body1'>{file.name}</Typography>
+                                    </Box>
+                                    // <Typography variant='body1'>{file.name}</Typography>
+                                )) : null}
                             </Grid>
                         </Grid>
                         <Grid item container xs={12} justifyContent={"center"} mt={4}>
