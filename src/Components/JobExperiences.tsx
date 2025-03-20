@@ -26,15 +26,16 @@ export const Tenzinc = () => {
               </>
             }
             <ExperienceChips>
-              <ChipMaker chips={[".NET", "C#", "Firebase", "HTML/CSS", "Javascript", "Material UI", "PostgreSQL", "Python", "ReactJS", "Typescript"]} />
+              <ChipMaker chips={[".NET", "C#", "Firebase", "HTML/CSS", "Javascript", "Material UI", "PostgreSQL", "Python", "ReactJS", "Typescript", "DigitalOcean"]} />
             </ExperienceChips>
           </Grid>
         </Grid>
       </Grid>
       <Grid item xs={12} md={12}>
-        <Typography variant='body1' mt={2}>At Tenzinc Ltd since December 2021, as a Software Engineer, I've been involved in developing technology services using various web technologies. I work with experts to capture project requirements and define technology details.</Typography>
-        <Typography variant='body1' mt={2}>My role includes backend and frontend infrastructure development, encompassing multiple microservices and test frontends. I write tests for these microservices to ensure their proper functioning.</Typography>
-        <Typography variant='body1' mt={2}>I use TypeScript, ReactJS, C#, SQL, and Firebase for full-stack development, making use of features like Realtime Database, Firestore, and more. I also work with clients to create custom applications, and use Azure DevOps for version control, CI/CD, and applying agile methods.</Typography>
+        <Typography variant='body1' mt={2}>At Tenzinc, I work across a wide range of responsibilities, from Linux system administration and IoT deployment to full-stack development and internal tooling. I manage cloud infrastructure on DigitalOcean (Ubuntu/Debian), maintain platform uptime, and build fault-tolerant software deployed through custom APT and Python package servers I set up and maintain.</Typography>
+        <Typography variant='body1' mt={2}>On the IoT side, I’ve installed and supported devices across multiple customer locations, developed telemetry analysis tools, built real-time dashboards using Thingsboard (HTML, CSS, JS), and written APIs for device and user management using FastAPI, Node.js/Express, and Next.js.</Typography>
+        <Typography variant='body1' mt={2}>To support the broader business, I contribute to full-stack web development with React, Next.js, and C#/ASP.NET, building customer facing dashboards, internal tools, and company platforms. I've also created APIs for document and transaction management as part of bespoke internal systems.</Typography>
+        <Typography variant='body1' mt={2}>Outside of engineering, I often interface directly with customers for support, handle platform provisioning, and work hands-on to ensure smooth and scalable delivery of our services. I use Azure DevOps for version control, CI/CD, and project management, and follow agile workflows across projects.</Typography>
       </Grid>
     </>
   )

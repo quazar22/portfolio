@@ -48,6 +48,13 @@ const ProjectAdmin = () => {
     const [files, setFiles] = useState([] as File[]);
     const [errorDialog, setErrorDialog] = useState("");
 
+    const [projectTitle, setProjectTitle] = useState("");
+    const [projectDescription, setProjectDescription] = useState("");
+    const [githubLink, setGithubLink] = useState("");
+    const [deployedLink, setDeployedLink] = useState("");
+    const [videoLink, setVideoLink] = useState("");
+
+
     const onExperienceChipChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setExperienceChipInput(event.target.value);
     }
@@ -61,6 +68,19 @@ const ProjectAdmin = () => {
         setChips(newChips);
         chipRef.current!.value = "";
         setExperienceChipInput("");
+    }
+
+    const handleAddProject = () => {
+        const api_endpoint = getApiUrl() + '/projects';
+        const formData = new FormData();
+
+        const titleValue = projectTitle;
+        const descriptionValue = projectDescription;
+        const githubLinkValue = githubLink;
+        const deployedLinkValue = deployedLink;
+        const videoLinkValue = videoLink;
+
+        
     }
 
     useEffect(() => {
@@ -127,7 +147,7 @@ const ProjectAdmin = () => {
                                 required
                                 sx={TextAreaStyles}
                                 inputProps={{ maxLength: 50 }}
-                            // onChange={onNameEmailChange}
+                                onChange={(e) => { setProjectTitle(e.target.value) }}
                             />
                         </Grid>
                         <Grid item xs={6}>
@@ -141,7 +161,7 @@ const ProjectAdmin = () => {
                                 required
                                 sx={TextAreaStyles}
                                 inputProps={{ maxLength: 250 }}
-                            // onChange={onNameEmailChange}
+                                onChange={(e) => { setProjectDescription(e.target.value) }}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -159,7 +179,7 @@ const ProjectAdmin = () => {
                                 type='text'
                                 sx={TextAreaStyles}
                                 inputProps={{ maxLength: 250 }}
-                            // onChange={onNameEmailChange}
+                                onChange={(e) => { setGithubLink(e.target.value) }}
                             />
                         </Grid>
                         <Grid item xs={6}>
@@ -172,7 +192,20 @@ const ProjectAdmin = () => {
                                 type='text'
                                 sx={TextAreaStyles}
                                 inputProps={{ maxLength: 250 }}
-                            // onChange={onNameEmailChange}
+                                onChange={(e) => { setDeployedLink(e.target.value) }}
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                variant='outlined'
+                                label={`Video Link`}
+                                fullWidth
+                                inputMode='text'
+                                autoComplete='off'
+                                type='text'
+                                sx={TextAreaStyles}
+                                inputProps={{ maxLength: 250 }}
+                                onChange={(e) => { setVideoLink(e.target.value) }}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -259,7 +292,7 @@ const ProjectAdmin = () => {
                                     color='primary'
                                     size='large'
                                     sx={{ width: '100%' }}
-                                    onClick={() => { addChip(chipRef.current?.value as string) }}
+                                    onClick={() => { handleAddProject() }}
                                 >
                                     Add Project
                                 </StyledButton>
