@@ -13,8 +13,8 @@ import AnimatedBackground from './Components/AnimatedBackground';
 import FloatingSquare from './Components/FloatingSquare';
 import Blog from './Components/Blog';
 import MoreProjects from './Components/MoreProjects';
-import ProjectAdmin from './Components/ProjectAdmin';
 import NotFound from './NotFound';
+import ProjectDetails from './Components/ProjectDetails';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement,
@@ -36,7 +36,7 @@ root.render(
                     <Route path="/" element={<App />} />
                     <Route path="/blog" element={<Blog />} />
                     <Route path="/projects" element={<MoreProjects />} />
-                    <Route path="/project_admin" element={<ProjectAdmin />} />
+                    <Route path="/projects/:id" element={<ProjectDetails />} />
                 </Routes>
             </Router>
         </StyledThemeProvider>

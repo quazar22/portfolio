@@ -5,3 +5,7 @@ export function getApiUrl() {
         return "https://api.therandomsgenerator.com";
     }
 }
+
+export function getCDN() {
+    return 'https://cdn.sanity.io/images/tki5mjz8/production/';
+}
