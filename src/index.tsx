@@ -35,8 +35,10 @@ root.render(
                     <Route path='*' element={<NotFound />} />
                     <Route path="/" element={<App />} />
                     <Route path="/blog" element={<Blog />} />
+                    <Route path="/blog/:blogId" element={<Blog />} />
                     <Route path="/projects" element={<MoreProjects />} />
-                    <Route path="/projects/:id" element={<ProjectDetails />} />
+                    <Route path="/projects/:projectId" element={<MoreProjects />} />
+                    {/* <Route path="/projects/:id" element={<ProjectDetails />} /> */}
                 </Routes>
             </Router>
         </StyledThemeProvider>

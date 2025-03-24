@@ -44,7 +44,7 @@ const ProjectDetails = () => {
     useEffect(() => {
         const getProject = async () => {
             try {
-                const query = `*[_type == "project" && _id == "${projectId}"]`;
+                const query = `*[_type == "projectType" && _id == "${projectId}"]`;
                 const data = await client.fetch<ProjectType[]>(query);
                 if (data && data.length > 0) {
                     setProject(data[0]);

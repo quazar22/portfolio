@@ -46,7 +46,7 @@ const Projects = () => {
     useEffect(() => {
         const getProjects = async () => {
             try {
-                const query = '*[_type == "project"]';
+                const query = '*[_type == "projectType"] | order(publishedAt desc)[0...6]';
                 const data = await client.fetch<Array<ProjectType>>(query);
                 setProjects(data);
                 console.log(data);
