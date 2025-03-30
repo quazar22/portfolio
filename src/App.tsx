@@ -10,6 +10,7 @@ import Projects from './Components/Projects';
 import Contact from './Components/Contact';
 import Footer from './Components/Footer';
 import { Page, pageIds } from './Components/ResponsiveAppBar';
+import { useLocation } from 'react-router-dom';
 
 function App() {
     const theme = useTheme();
@@ -23,6 +24,8 @@ function App() {
     const projectsRef = useRef<null | HTMLDivElement>(null);
     const contactRef = useRef<null | HTMLDivElement>(null);
     const [currentSection, setCurrentSection] = useState<string>("");
+    const [projectsLoaded, setProjectsLoaded] = useState<boolean>(false);
+    const location = useLocation();
 
     const pages: Page[] = [
         { title: 'About Me' },
@@ -85,14 +88,6 @@ function App() {
         observer.observe(projectsRef.current as HTMLDivElement);
         observer.observe(contactRef.current as HTMLDivElement);
 
-        // on first load, scroll to the top of the page and set the current section to the first section ("aboutme")
-        // window.scrollTo({
-        //   top: 0,
-        //   behavior: "smooth"
-        // });
-        setCurrentSection(pageIds(pages)[0]);
-        // console.log("default current section: " + pageIds[0])
-
         return () => {
             // observer.unobserve(aboutRef.current as HTMLDivElement);
             // observer.unobserve(experienceRef.current as HTMLDivElement);
@@ -102,6 +97,27 @@ function App() {
             observer.disconnect();
         };
     }, []);
+
+    useEffect(() => {
+        // Only perform the scroll when projects are loaded
+        if (projectsLoaded) {
+          const currentHash = location.hash;
+          if (currentHash) {
+            const targetElement = document.querySelector<HTMLElement>(currentHash);
+            if (targetElement) {
+              const targetPosition = targetElement.offsetTop;
+              const offsetPosition = targetPosition - appBarHeight;
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+              });
+            }
+            setCurrentSection(currentHash.replace("#", ""));
+          } else {
+            setCurrentSection(pageIds(pages)[0]);
+          }
+        }
+      }, [location.hash, projectsLoaded]);
 
     return (
         <>
@@ -139,7 +155,10 @@ function App() {
                 <ResponsiveAppBar currentSection={currentSection} pages={pages} />
                 <div ref={aboutRef} style={{ marginBottom: isMobile ? "4rem" : "8rem" }}><AboutMe /></div>
                 <div ref={experienceRef} style={{ marginBottom: isMobile ? "4rem" : "8rem" }}><Experience /></div>
-                <div ref={projectsRef} style={{ marginBottom: isMobile ? "4rem" : "8rem" }}><Projects /></div>
+                <div ref={projectsRef} style={{ marginBottom: isMobile ? "4rem" : "8rem" }}>
+                    {/* Pass onLoad callback to update projectsLoaded */}
+                    <Projects onLoad={() => setProjectsLoaded(true)} />
+                </div>
                 <div ref={contactRef} style={{ marginBottom: isMobile ? "4rem" : "4rem" }}><Contact /></div>
                 <FinalDivider />
                 <div style={{ marginBottom: isMobile ? "4rem" : "4rem" }}><Footer /></div>

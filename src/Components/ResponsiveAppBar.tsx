@@ -86,6 +86,9 @@ function ResponsiveAppBar(props: { currentSection: string, pages: Page[], hideOn
                             let id = a.replace("#", "");
                             let doc = document.getElementById(id);
                             setMobileOpen(false);
+                            if (!props.hideOnScroll) {
+                                return;
+                            }
                             setTimeout(() => {
                                 if (doc) {
                                     doc.scrollIntoView({ behavior: 'smooth' });
@@ -142,6 +145,9 @@ function ResponsiveAppBar(props: { currentSection: string, pages: Page[], hideOn
                                         navigate(page.redirect);
                                     }
                                     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+                                    if (!props.hideOnScroll) {
+                                        return;
+                                    }
                                     setTimeout(() => {
                                         setShowBar(false);
                                     }, 1000);

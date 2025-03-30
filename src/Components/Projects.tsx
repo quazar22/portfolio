@@ -23,6 +23,10 @@ const ProjectWrapper = (props: { project: ProjectType }) => {
     );
 }
 
+interface ProjectsProps {
+    onLoad?: () => void;
+}
+
 export const client = createClient({
     projectId: 'tki5mjz8',
     dataset: 'production',
@@ -36,52 +40,46 @@ export function urlFor(source: any) {
     return builder.image(source);
 }
 
-const Projects = () => {
-    let theme = useTheme();
+const Projects: React.FC<ProjectsProps> = ({ onLoad }) => {
+    const theme = useTheme();
     const navigate = useNavigate();
-    const [projects, setProjects] = useState([] as ProjectType[]);
-
-    const cdn = getCDN();
+    const [projects, setProjects] = useState<ProjectType[]>([]);
 
     useEffect(() => {
         const getProjects = async () => {
             try {
                 const query = '*[_type == "projectType"] | order(publishedAt desc)[0...6]';
-                const data = await client.fetch<Array<ProjectType>>(query);
+                const data = await client.fetch<ProjectType[]>(query);
                 setProjects(data);
-                console.log(data);
-
+                // Notify parent that the projects are loaded.
+                if (onLoad) onLoad();
             } catch (error) {
                 console.log(error);
             }
-        }
+        };
         getProjects();
-    }, []);
+    }, [onLoad]);
 
     return (
-        <Container
-            maxWidth="lg"
-            id="projects"
-        >
+        <Container maxWidth="lg" id="projects">
             <Grid container spacing={4}>
                 <Grid item xs={12}>
                     <SectionTitle title="Personal Projects" />
                 </Grid>
-                {projects.map((project, i) => <ProjectWrapper key={i} project={project} />)}
-                {/* {project_list.map((project, i) => <ProjectWrapper key={i} project={project} />)} */}
+                {projects.map((project, i) => (
+                    <Grid item xs={12} sm={6} md={6} lg={4} key={i}>
+                        <Project project={project} />
+                    </Grid>
+                ))}
             </Grid>
-            {/* <Typography variant="h6" align="center" sx={{ mt: 4 }}>
-        More projects to be added soon!
-      </Typography> */}
             <Grid container justifyContent="center" sx={{ mt: 4 }}>
                 <StyledButton
                     sx={{
                         outline: '1px solid ' + hexToRgbA(theme.palette.primary.main, 0.3),
                         '&:hover': {
-                            outline: '1px solid ' + hexToRgbA(theme.palette.primary.main, .5),
+                            outline: '1px solid ' + hexToRgbA(theme.palette.primary.main, 0.5),
                             backgroundColor: hexToRgbA(theme.palette.customPalette.dark, 0.3),
-                            // boxShadow: '0 0 10px 5px ' + hexToRgbA(theme.palette.primary.main, 0.3),
-                        }
+                        },
                     }}
                     onClick={() => {
                         navigate('/projects');
@@ -92,6 +90,6 @@ const Projects = () => {
             </Grid>
         </Container>
     );
-}
+};
 
 export default Projects;

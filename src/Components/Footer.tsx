@@ -24,6 +24,14 @@ const Footer = () => {
               }}>
               Created by Geoffrey Knox using React, TypeScript, and Material UI.
             </Typography>
+            <Typography
+              variant="body2"
+              align="center"
+              sx={{
+                color: theme.palette.additionalText.dark
+              }}>
+              {process.env.REACT_APP_VERSION} - {new Date().getFullYear()}
+            </Typography>
           </Box>
         </Grid>
       </Grid>
