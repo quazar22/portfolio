@@ -77,20 +77,20 @@ const AboutMe = () => {
               textAlign={"left"}
               mb={2}
             >
-              Hello, I'm a software engineer currently residing in Glasgow, Scotland.
+              Hello, I'm Geoffrey - a software engineer based in Glasgow, Scotland.
             </Typography>
             <Typography
               variant="body1"
               textAlign={"left"}
               mb={2}
             >
-              My experience spans both frontend and backend development, with an affinity for learning and applying diverse technologies and programming languages.
+              I work across the stack, building everything from backend services and APIs to internal tools and dashboards. I’ve worked on IoT platforms, cloud infrastructure, and custom deployment systems, and I enjoy solving real-world problems with clean, reliable code.
             </Typography>
             <Typography
               variant="body1"
               textAlign={"left"}
             >
-              When I'm not working, I enjoy spending time with my wife and our two dogs, playing video games, exploring the beautiful Scottish countryside, and working on personal projects to further my skills.
+              I like being part of teams that care about the work and support each other. Outside of work, I spend time with my wife and our two dogs, explore the Scottish countryside, play games, and work on side projects to keep learning.
             </Typography>
           </Grid>
           {/* <Typography
