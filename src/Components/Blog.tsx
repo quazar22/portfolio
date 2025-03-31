@@ -6,7 +6,10 @@ import {
     Typography,
     Paper,
     Divider,
-    Link as MuiLink
+    List,
+    ListItem,
+    ListItemText,
+    Link
 } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { BlogType } from '../Models/Project';
@@ -17,6 +20,7 @@ import ResponsiveAppBar from './ResponsiveAppBar';
 import { Page } from './ResponsiveAppBar';
 import { ChipMaker, ExperienceChips } from '../utils/ChipMaker';
 import { groupListItems } from '../utils/groupListItems';
+import { CopyBlock, a11yDark as dark } from 'react-code-blocks';
 
 // Helper: Slugify text for IDs.
 const slugify = (text: string) =>
@@ -93,16 +97,13 @@ const Blog = () => {
                     node = <u>{node}</u>;
                 } else if (mark === 'code') {
                     node = (
-                        <code
-                            style={{
-                                backgroundColor: hexToRgbA(theme.palette.primary.main, 0.1),
-                                padding: '2px 4px',
-                                borderRadius: '4px',
-                                fontFamily: 'monospace',
-                            }}
-                        >
-                            {node}
-                        </code>
+                        <CopyBlock
+                            text={node as string}
+                            language=""
+                            showLineNumbers={false}
+                            theme={dark}
+                            codeBlock
+                        />
                     );
                 } else {
                     const linkDef = markDefs?.find(
@@ -139,7 +140,7 @@ const Blog = () => {
         ));
         // If block is a heading (h2 or h3), add an id.
         const headingId =
-            (block.style === 'h2' || block.style === 'h3') && childrenNodes
+            (block.style === 'h2' || block.style === 'h3' || block.style === 'h4') && childrenNodes
                 ? slugify(
                     (block.children as any)
                         .map((child: any) => child.text)
@@ -192,7 +193,7 @@ const Blog = () => {
         return selectedBlog.body
             .filter(
                 (block) =>
-                    block._type === 'block' && (block.style === 'h2' || block.style === 'h3')
+                    block._type === 'block' && (block.style === 'h2' || block.style === 'h3' || block.style === 'h4')
             )
             .map((block: any) => {
                 const text = block.children?.map((child: any) => child.text).join(' ') || '';
@@ -211,23 +212,44 @@ const Blog = () => {
                 <Typography variant="h6" gutterBottom>
                     Contents
                 </Typography>
-                <Box component="ul" sx={{ listStyle: 'none', pl: 0 }}>
+                <List disablePadding>
                     {tocItems.map((item, idx) => (
-                        <li key={idx}>
-                            <MuiLink
+                        <ListItem
+                            key={idx}
+                            disableGutters
+                            sx={{
+                                pl:
+                                    item.level === 'h2'
+                                        ? 0
+                                        : item.level === 'h3'
+                                            ? 2
+                                            : item.level === 'h4'
+                                                ? 4
+                                                : 0,
+                                mb: 0.5,
+                            }}
+                        >
+                            <Link
                                 href={`#${item.id}`}
                                 underline="hover"
                                 sx={{
-                                    ml: item.level === 'h3' ? 2 : 0,
+                                    fontSize:
+                                        item.level === 'h2'
+                                            ? '1.25rem'
+                                            : item.level === 'h3'
+                                                ? '1.1rem'
+                                                : item.level === 'h4'
+                                                    ? '.9rem'
+                                                    : '.8rem',
                                     color: theme.palette.primary.main,
                                     cursor: 'pointer',
                                 }}
                             >
                                 {item.text}
-                            </MuiLink>
-                        </li>
+                            </Link>
+                        </ListItem>
                     ))}
-                </Box>
+                </List>
             </Box>
         );
     };

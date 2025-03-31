@@ -89,12 +89,12 @@ export const GreenthumbAutomation = () => {
               <>
                 <Typography variant='h5' fontWeight={"bold"}>Greenthumb Automation</Typography>
                 <Typography variant='h6' fontWeight={"bold"}>Software Developer</Typography>
-                <Typography variant='h6' fontWeight={"bold"}>Nov 2020 - Dec 2021</Typography>
+                <Typography variant='h6' fontWeight={"bold"}>Jun 2020 - Jan 2021</Typography>
                 <Typography variant='h6' fontWeight={"bold"}>Albuquerque, NM, US</Typography>
               </>
               :
               <>
-                <Typography variant='h5' fontWeight={"bold"}>Greenthumb Automation, Software Developer from Nov 2020 - Dec 2021</Typography>
+                <Typography variant='h5' fontWeight={"bold"}>Greenthumb Automation, Software Developer from Jun 2020 - Jan 2021</Typography>
                 <Typography variant='h6' fontWeight={"bold"}>Albuquerque, New Mexico, United States</Typography>
               </>
             }
