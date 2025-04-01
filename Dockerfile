@@ -4,8 +4,9 @@ WORKDIR /app
 
 COPY package.json ./
 COPY package-lock.json ./
+COPY .env ./.env
 
-RUN npm install
+RUN npm install --legacy-peer-deps
 RUN npm install react-scripts -g
 RUN npm install serve -g
 
