@@ -1,46 +1,40 @@
-# Getting Started with Create React App
+# Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
+Welcome to my portfolio website! It was created awhile ago using create-react-app, so it is a little out of date. I justify this by stating that maintaining old software is just apart of the job, right? Realistically I will update it to use NextJS/Tailwind at some point, as I've grown a bit more familiar with that combo. 
 
-## Available Scripts
+My goal with this site is to elaborate on my experience and side projects beyond what could reasonably fit on my resume/CV. I also wanted to add a small blog to detail some other things that I work on that might not fit into the site as a project. It covers some basic information about me, my work experiences, a few personal projects (mostly aside from work that I can share), it includes a contact me section, and finally the blog.
 
-In the project directory, you can run:
+## Stack
+- ReactJS for the frontend
+- Sanity CMS for storing project/blog data
+- Appwrite DB for storing contact me info (I use it for other things too, not just this)
+- ExpressJS endpoint for processing contact messages
+- Github Actions to automatically deploy new versions from main branch
 
-### `npm start`
+## How to run dev
+1. In the terminal, run `npm i` to install the necessary packages
+2. Start the frontend with `npm run start`
+3. To debug, use the vscode launch configuration "Launch Chrome against localhost"
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Deploying
+Docker is used to run the app in a production environment. Navigate to the portfolio directory and type `docker compose up -d` to start the app.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Sanity CMS
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Sanity CMS is used to update the project and blog entries. The CMS project as well as the schemas for projects and blogs are included with it. This will run, but requires authentication to modify entries against my database. To change the sanity projectId for use in your own portfolio, you'll need to update the project id in:
 
-### `npm run build`
+```
+portfolio/portfoliocms/sanity.cli.ts
+portfolio/portfoliocms/sanity.config.ts
+portfolio/src/Components/Projects.tsx
+portfolio/src/utils/url.ts
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Sanity Installation
+Sanity is a separate sub-package included in the portfolio. I thought it beneficial to include it like this as the two are closely tied together and I often use them together.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Run `npm i` to install the node packages
+2. Run `npm run dev` to run sanity in dev mode
+3. Navigate to `localhost:3333` to access the Sanity UI

@@ -11,28 +11,38 @@ import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
 import AnimatedBackground from './Components/AnimatedBackground';
 import FloatingSquare from './Components/FloatingSquare';
+import Blog from './Components/Blog';
+import MoreProjects from './Components/MoreProjects';
+import NotFound from './NotFound';
+import ProjectDetails from './Components/ProjectDetails';
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement,
+    document.getElementById('root') as HTMLElement,
 );
 
 // create async initial request to store ip address in external database
 if (process.env.NODE_ENV === 'production') {
-  fetch('https://api.therandomsgenerator.com/logger/access', { method: 'POST' }).catch(err => {});
+    fetch('https://api.therandomsgenerator.com/logger/access', { method: 'POST' }).catch(err => { });
 }
 
 root.render(
 
-  <ThemeProvider theme={theme}>
-    <StyledThemeProvider theme={theme}>
-      <CssBaseline />
-      <Router>
-        <Routes>
-          <Route path="/" element={<App />} />
-        </Routes>
-      </Router>
-    </StyledThemeProvider>
-  </ThemeProvider >
+    <ThemeProvider theme={theme}>
+        <StyledThemeProvider theme={theme}>
+            <CssBaseline />
+            <Router>
+                <Routes>
+                    <Route path='*' element={<NotFound />} />
+                    <Route path="/" element={<App />} />
+                    <Route path="/blog" element={<Blog />} />
+                    <Route path="/blog/:blogId" element={<Blog />} />
+                    <Route path="/projects" element={<MoreProjects />} />
+                    <Route path="/projects/:projectId" element={<MoreProjects />} />
+                    {/* <Route path="/projects/:id" element={<ProjectDetails />} /> */}
+                </Routes>
+            </Router>
+        </StyledThemeProvider>
+    </ThemeProvider >
 );
 
 // If you want to start measuring performance in your app, pass a function
