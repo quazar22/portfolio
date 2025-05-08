@@ -34,3 +34,6 @@ jobs:
       run: |
         ssh deploy@geoffrey-knox.com "rm -rf /var/www/portfolio/*"
         scp -r ./build/* deploy@geoffrey-knox.com:/var/www/portfolio/
+
+    - name: Restart portfolio service
+      run: ssh deploy@geoffrey-knox.com "sudo systemctl restart portfolio"
